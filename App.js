@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { posts, users } from './components/WPAPI';
 import SearchPage from './components/SearchPage';
-import Footer from './components/Footer'; 
+import Footer from './components/Footer';
+import Messages from './components/Messages';
+import ImageGallery from './components/ImageGallery';
 
 export default function App() {
   posts();
@@ -10,6 +12,7 @@ export default function App() {
 
   return (    
     <View>
+      <ImageGallery/>
       <SearchPage/>
       <Footer/>      
     </View>
