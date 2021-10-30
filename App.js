@@ -14,17 +14,10 @@ export default function App() {
     <View>
       <ImageGallery/>
       <SearchPage/>
-      <Footer/>      
+      <Footer/>
+      <Messages/>      
     </View>
   );
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },  
-// });
+
