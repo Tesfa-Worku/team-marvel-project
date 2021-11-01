@@ -5,8 +5,8 @@ import { posts, users } from './components/WPAPI';
 import ProfilePage from './components/ProfilePage';
 
 export default function App() {
-  posts();
-  users();
+  //posts();
+  //users();
   return (
     <View>
         <ProfilePage />
