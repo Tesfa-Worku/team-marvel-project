@@ -7,20 +7,19 @@ import {
     ScrollView,
     Image
 } from 'react-native';
-import { media } from './WPAPI';
+import { WP_GET } from './WPAPI';
 
 export default function ImageGallery() {
     const [imageArr, setImageArr] = useState([]);
     useEffect(
         () => {
-            media()
+            WP_GET('media')
             .then(
                 (data) => setImageArr(data)
             )
         },
         []
     )
-    console.log(imageArr);
     const [imageInput, setImageInput] = useState('');
 
 const uploadImage = () =>{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -7,17 +7,23 @@ import {
     TextInput,
     ScrollView
 } from 'react-native';
+import { WP_GET } from './WPAPI';
 
 export default function Messages() {
     const [messageArr, setMessageArr] = useState([
         {message: 'heeey :)'}
     ]);
     const [messageInput, setMessageInput] = useState('');
-
-    // test object
-    const dummyData = {
-        name: 'Xavier',
-    }
+    const [userData, setUserData] = useState([]);
+    useEffect(
+        () => {
+            WP_GET('users')
+            .then(
+                (data) => setUserData(data)
+            )
+        },
+        []
+    )
 
 const sendMessage = () => {
     setMessageArr([...messageArr, {message: messageInput}]);
@@ -29,6 +35,15 @@ const deleteMessage = (index) => {
         messageArr.filter((text, selected) => selected != index)
         );
 }
+
+const userList = userData.map((user, id) => (
+    // click on name to get messages with specific id
+    // attach onPress function to Text
+    <View key={id}>
+        <Text>{user.name}</Text>
+    </View>
+    )
+)
 
 const generateConversation = messageArr.map((text, index) => (
     <View key={index}>
@@ -45,7 +60,7 @@ const generateConversation = messageArr.map((text, index) => (
 const MessageWindow = () => {
     return (
         <View>
-            <Text>{dummyData.name}</Text>
+            <Text>{userData.name}</Text>
             <ScrollView>
                 {generateConversation}
             </ScrollView>
@@ -67,8 +82,13 @@ const MessageWindow = () => {
 }
 
 return (
-    <View style={styles.container}>
-        {MessageWindow()}
+    <View>
+        <View style={styles.sidebar}>
+            {userList}
+        </View>
+        <View style={styles.container}>
+            {MessageWindow()}
+        </View>
     </View>
     )
 }
@@ -79,5 +99,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    sidebar: {
+        float: 'left',
     },
 });
