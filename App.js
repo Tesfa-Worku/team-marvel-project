@@ -1,37 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, } from 'react-native';
-import { posts, users } from './components/WPAPI'; 
-import Header from './components/Header';
+//import { StyleSheet, View, } from 'react-native';
+//import { posts, users } from './components/WPAPI'; 
+//import Header from './components/Header';
+//import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Drawer from './src/navigation/drawer';
 
 export default function App() {
-  posts();
-  users();
-
-  return (
-    <View style={styles.container}>
-      <Header/>
-    </View>
-  );
-        
+    return (
+        <NavigationContainer>
+            <Drawer />
+        </NavigationContainer>
+    );
 }
 
-const styles = StyleSheet.create ({
-  container: {
-     flex: 1,
-     flexDirection: 'column',
-     justifyContent: 'space-around',
-     padding: 20,
-     marginTop: "100",
-  },
-   developerSection:{
-     flexDirection: "row",
-     justifyContent: 'center', 
-     padding: 10,
-  },
-    logout: {
-     flexDirection: 'row',
-     justifyContent: 'space-around',
-     padding: 10,
-  },
-});
-  
