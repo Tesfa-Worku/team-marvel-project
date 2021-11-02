@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet} from 'react-native';
 import { useForm } from 'react-hook-form';
 
 const ResetPassword = () => {
@@ -20,8 +20,11 @@ const ResetPassword = () => {
     }, [register]);
 
     return (
-    <View>
-        <Text>Reset Password</Text>
+    <View style={styles.container}>
+        <View>
+            <Text>Reset Password</Text>
+        </View>
+
         <View>
             <Text>Email</Text>
             <TextInput
@@ -30,7 +33,7 @@ const ResetPassword = () => {
             textContentType="emailAddress"
             placeholder="Email"
             onChangeText={onChangeField('email')}
-        />
+            />
         </View>
 
         <View>
@@ -53,12 +56,23 @@ const ResetPassword = () => {
             />
         </View>
     
-        <Button 
-            title="Reset" 
-            onPress={handleSubmit(onSubmit)} 
-        />
+        <View>
+            <Button 
+                title="Reset" 
+                onPress={handleSubmit(onSubmit)} 
+            />
+        </View>
     </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
 export default ResetPassword;
