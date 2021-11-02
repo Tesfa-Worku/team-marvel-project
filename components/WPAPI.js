@@ -19,16 +19,16 @@ const endpoint = {
     blocks: {path: '/wp/v2/blocks'},
 };
 
-export const WP_GET = (type, arguements) => {
+export const WP_GET = (type, arguments) => {
     const path = () => {
         const pathElements = '';
         const queryParams = '';
-        if (!arguements) {
+        if (!arguments) {
             return `${BASE_URL}${endpoint[type].path}`;
         }
-        if (typeof arguements === 'object') {
-            arguements.every((arguement) => {
-                console.log(endpoint[type].args[arguement])
+        if (typeof arguments === 'object') {
+            arguments.every((argument) => {
+                console.log(endpoint[type].args[argument])
             })
         }
         else {
