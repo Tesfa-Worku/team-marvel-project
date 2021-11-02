@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
 import ResetPassword from './components/ResetPassword';
+import SignUp from './components/SignUp';
 
 export default function App() {
   posts();

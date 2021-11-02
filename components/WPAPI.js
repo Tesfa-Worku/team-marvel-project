@@ -1,41 +1,41 @@
 const BASE_URL = 'https://jualuc1.dreamhosters.com/wp-json';
+const endpoint = {
+    posts: {path: '/wp/v2/posts',
+            args: {
+                id: {type: 'int', required: false, isParam: false},
+                author: {type: 'int', required: false, isParam: true},
+            },
+        },
+    users: {path: '/wp/v2/users',
+            args: {
+                id: {type: 'int', required: false, isParam: false},
+            },
+        },
+    media: {path: '/wp/v2/media'},
+    comments: {path: '/wp/v2/comments'},
+    categories: {path: '/wp/v2/categories'},
+    search: {path: '/wp/v2/search'},
+    blockTypes: {path: '/wp/v2/blockTypes'},
+    blocks: {path: '/wp/v2/blocks'},
+};
 
-export const posts= ()=> {
-    return fetch(`${BASE_URL}/wp/v2/posts`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const users =()=>{
-    return fetch(`${BASE_URL}/wp/v2/users`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const media =()=>{
-    return fetch(`${BASE_URL}/wp/v2/media/`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const comments =()=>{
-    return fetch(`${BASE_URL}/wp/v2/comments`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const categories =()=>{
-    return fetch(`${BASE_URL}/wp/v2/categories`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const search =()=>{
-    return fetch(`${BASE_URL}/wp/v2/search`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const blockTypes =()=>{
-    return fetch(`${BASE_URL}/wp/v2/block-types`).then(response => response.json())
-    .catch(error=>error)
-}
-
-export const blocks=()=>{
-    return fetch(`${BASE_URL}/wp/v2/blocks`).then(response => response.json())
+export const WP_GET = (type, arguments) => {
+    const path = () => {
+        const pathElements = '';
+        const queryParams = '';
+        if (!arguments) {
+            return `${BASE_URL}${endpoint[type].path}`;
+        }
+        if (typeof arguments === 'object') {
+            arguments.every((argument) => {
+                console.log(endpoint[type].args[argument])
+            })
+        }
+        else {
+            console.warn('Arguement must be an object')
+        }
+        return `${BASE_URL}${endpoint[type].path}`
+    }
+    return fetch(`${path()}`).then(response => response.json())
     .catch(error=>error)
 }
