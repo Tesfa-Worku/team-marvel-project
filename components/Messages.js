@@ -5,7 +5,9 @@ import {
     View,
     Button,
     TextInput,
-    ScrollView
+    ScrollView,
+    Pressable,
+    Image
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
@@ -15,14 +17,17 @@ export default function Messages() {
     ]);
     const [messageInput, setMessageInput] = useState('');
     const [userData, setUserData] = useState([]);
+    const [selectedUser, setSelectedUser] = useState({});
     useEffect(
         () => {
             WP_GET('users')
             .then(
-                (data) => setUserData(data)
+                (data) => {
+                    setUserData(data);
+                }
             )
         },
-        []
+        [selectedUser]
     )
 
 const sendMessage = () => {
@@ -36,11 +41,12 @@ const deleteMessage = (index) => {
         );
 }
 
-const userList = userData.map((user, id) => (
-    // click on name to get messages with specific id
-    // attach onPress function to Text
-    <View key={id}>
-        <Text>{user.name}</Text>
+// click on name to get messages with specific id
+const userList = userData.map((user, index) => (
+    <View key={index}>
+        <Pressable onPress={() => setSelectedUser(user)}>
+            <Text>{user.name}</Text>
+        </Pressable>
     </View>
     )
 )
@@ -58,9 +64,13 @@ const generateConversation = messageArr.map((text, index) => (
 )
 
 const MessageWindow = () => {
-    return (
+    return selectedUser && (
         <View>
-            <Text>{userData.name}</Text>
+            <Image
+                style={styles.image}
+                source={{uri: selectedUser.avatar_urls?.['24']}}
+            />
+            <Text>{selectedUser.name}</Text>
             <ScrollView>
                 {generateConversation}
             </ScrollView>
@@ -102,5 +112,9 @@ const styles = StyleSheet.create({
     },
     sidebar: {
         float: 'left',
+    },
+    image: {
+        height: 24,
+        width: 24,
     },
 });
