@@ -5,17 +5,19 @@ import SearchPage from './components/SearchPage';
 import Footer from './components/Footer';
 import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
+import ResetPassword from './components/ResetPassword';
 
 export default function App() {
   posts();
   users();
 
   return (    
-    <View>
+    <View>      
       <ImageGallery/>
-      <SearchPage/>
-      <Footer/>
-      <Messages/>      
+      <SearchPage/>      
+      <Messages/>
+      <ResetPassword/>
+      <Footer/>      
     </View>
   );
 };
