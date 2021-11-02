@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
     View,
@@ -8,63 +8,138 @@ import {
     StyleSheet,
     Image,
     TextInput,
+    Platform,
+    StatusBar,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import Friends from '../../screens/Friends';
-//import Images from '../../screens/Images';
+import Images from '../../screens/Images';
 import Messages from '../../screens/Messages';
 import Profile from '../../screens/Profile';
+import Newsfeed from '../../screens/Newsfeed';
 
 const DrawerNavigation = createDrawerNavigator();
+const isWeb = Platform.OS === 'web';
 
-const drawerContent = (props) => (
-    <SafeAreaView {...props} style={{ marginTop: 20, flex: 1 }}>
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Friends')}
-                    style={[
-                        styles.btn,
-                        props.state.index === 0 && styles.activeBtn,
-                    ]}
+const drawerContent = (props) => {
+    const isActive = (nameOrIndex) => {
+        if (isWeb) {
+            return props.route.name === nameOrIndex;
+        }
+
+        return props.state && props.state.index === nameOrIndex;
+    };
+
+    const { loggedIn, setLoggedIn } = props;
+
+    return (
+        <SafeAreaView
+            {...props}
+            style={{ marginTop: isWeb ? 0 : StatusBar.currentHeight, flex: 1 }}
+        >
+            <View
+                style={{
+                    flex: 1,
+                    flexDirection: isWeb ? 'row' : 'column',
+                }}
+            >
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: isWeb ? 'row' : 'column',
+                        justifyContent: isWeb ? 'flex-end' : undefined,
+                        marginHorizontal: isWeb ? 12 : 0,
+                        flexWrap: isWeb ? 'wrap' : 'nowrap',
+                    }}
                 >
-                    <Text>Friends</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Images')}
-                    style={[
-                        styles.btn,
-                        props.state.index === 1 && styles.activeBtn,
-                    ]}
-                >
-                    {/* <Text>Images</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Messages')}
-                    style={[
-                        styles.btn,
-                        props.state.index === 2 && styles.activeBtn,
-                    ]} */}
-                >
-                    <Text>Messages</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate('Profile')}
-                    style={[
-                        styles.btn,
-                        props.state.index === 3 && styles.activeBtn,
-                    ]}
-                >
-                    <Text>Profile</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Friends')}
+                        style={[
+                            styles.btn,
+                            isActive(isWeb ? 'Friends' : 0) && styles.activeBtn,
+                        ]}
+                    >
+                        <Text>Friends</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Images')}
+                        style={[
+                            styles.btn,
+                            isActive(isWeb ? 'Images' : 1) && styles.activeBtn,
+                        ]}
+                    >
+                        <Text>Images</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Messages')}
+                        style={[
+                            styles.btn,
+                            isActive(isWeb ? 'Messages' : 2) &&
+                                styles.activeBtn,
+                        ]}
+                    >
+                        <Text>Messages</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Newsfeed')}
+                        style={[
+                            styles.btn,
+                            isActive(isWeb ? 'Newsfeed' : 3) &&
+                                styles.activeBtn,
+                        ]}
+                    >
+                        <Text>Newsfeed</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Profile')}
+                        style={[
+                            styles.btn,
+                            isActive(isWeb ? 'Profile' : 4) && styles.activeBtn,
+                        ]}
+                    >
+                        <Text>Profile</Text>
+                    </TouchableOpacity>
+                </View>
+                {isWeb ? (
+                    <>
+                        {loggedIn ? (
+                            <TouchableOpacity
+                                onPress={() => setLoggedIn(!loggedIn)}
+                            >
+                                <Text>Logout</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity
+                                    onPress={() => setLoggedIn(!loggedIn)}
+                                >
+                                    <Text>Login</Text>
+                                </TouchableOpacity>
+                                <Text style={{ marginHorizontal: 4 }}>|</Text>
+                                <TouchableOpacity>
+                                    <Text>SignUp</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </>
+                ) : (
+                    <TouchableOpacity
+                        style={[styles.btn, styles.btnDanger]}
+                        onPress={() => {
+                            setLoggedIn && setLoggedIn(!loggedIn);
+                        }}
+                    >
+                        <Text style={styles.textDanger}>
+                            {loggedIn ? 'Logout' : 'Login'}
+                        </Text>
+                    </TouchableOpacity>
+                )}
             </View>
-            <TouchableOpacity style={[styles.btn, styles.btnDanger]}>
-                <Text style={styles.textDanger}>Logout</Text>
-            </TouchableOpacity>
-        </View>
-    </SafeAreaView>
-);
+        </SafeAreaView>
+    );
+};
 
 const header = (props) => {
     const { showInput, setShowInput } = props;
@@ -83,20 +158,38 @@ const header = (props) => {
                 </View>
             ) : (
                 <>
-                    <TouchableOpacity onPress={props.navigation.toggleDrawer}>
-                        <AntDesign name="menuunfold" size={24} color="black" />
-                    </TouchableOpacity>
+                    <View>
+                        {!isWeb && (
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                Marvel Space
+                            </Text>
+                        )}
+                        {Platform.OS !== 'web' && (
+                            <TouchableOpacity
+                                onPress={props.navigation.toggleDrawer}
+                            >
+                                <AntDesign
+                                    name="menuunfold"
+                                    size={24}
+                                    color="black"
+                                />
+                            </TouchableOpacity>
+                        )}
+                    </View>
                     <View style={{ alignItems: 'center' }}>
-                        {/* <Image
-                            source={require('../../images/fist-1.jpg')}
+                        {isWeb && (
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                Title
+                            </Text>
+                        )}
+                        <Image
+                            source={require('../../Images/Logo.png')}
                             width={64}
                             height={32}
-                            style={{ width: 64, height: 32 }} */}
+                            style={{ width: 64, height: 32 }}
                         />
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                            Title
-                        </Text>
                     </View>
+                    {isWeb && drawerContent(props)}
                     <TouchableOpacity onPress={() => setShowInput(true)}>
                         <AntDesign name="search1" size={24} color="black" />
                     </TouchableOpacity>
@@ -108,17 +201,25 @@ const header = (props) => {
 
 function Drawer() {
     const [showInput, setShowInput] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     return (
         <DrawerNavigation.Navigator
-            drawerContent={drawerContent}
+            drawerContent={Platform.OS === 'web' ? undefined : drawerContent}
             screenOptions={{
                 header: (props) =>
-                    header({ ...props, showInput, setShowInput }),
+                    header({
+                        ...props,
+                        showInput,
+                        setShowInput,
+                        loggedIn,
+                        setLoggedIn,
+                    }),
             }}
         >
             <DrawerNavigation.Screen name="Friends" component={Friends} />
-            {/* <DrawerNavigation.Screen name="Images" component={Images} /> */}
+            <DrawerNavigation.Screen name="Images" component={Images} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
+            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
         </DrawerNavigation.Navigator>
     );
@@ -130,12 +231,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
     },
     header: {
-        marginTop: 20,
+        marginTop: isWeb ? 0 : StatusBar.currentHeight,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 12,
         paddingHorizontal: 8,
         backgroundColor: '#00f',
+        alignItems: 'center',
     },
     btnDanger: {
         backgroundColor: '#aa0000',
@@ -159,3 +261,5 @@ const styles = StyleSheet.create({
 });
 
 export default Drawer;
+
+
