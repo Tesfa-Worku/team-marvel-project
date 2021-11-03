@@ -16,7 +16,7 @@ import Friends from '../../Friends';
 import ImageGallery from '../../ImageGallery';
 import Messages from '../../Messages';
 import Profile from '../../Profile';
-import Newsfeed from '../../Newsfeed';
+// import Newsfeed from '../../Newsfeed';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
@@ -80,16 +80,16 @@ const drawerContent = (props) => {
                     >
                         <Text>Messages</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => props.navigation.navigate('Newsfeed')}
                         style={[
                             styles.btn,
                             isActive(isWeb ? 'Newsfeed' : 3) &&
                                 styles.activeBtn,
                         ]}
-                    >
-                        <Text>Newsfeed</Text>
-                    </TouchableOpacity>
+                    > */}
+                        {/* <Text>Newsfeed</Text> */}
+                    {/* </TouchableOpacity> */}
 
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('Profile')}
@@ -216,9 +216,9 @@ function Drawer() {
             }}
         >
             <DrawerNavigation.Screen name="Friends" component={Friends} />
-            <DrawerNavigation.Screen name="Images" component={Images} />
+            <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
-            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
+            {/* <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} /> */}
             <DrawerNavigation.Screen name="Profile" component={Profile} />
         </DrawerNavigation.Navigator>
     );
