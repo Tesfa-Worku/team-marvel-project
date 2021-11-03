@@ -15,7 +15,7 @@ export default function ProfilePage () {
       },
       []
   )
-  console.log(userList)
+  //console.log(userList)
 
   const buildProfile = userList.map((user, index) => {
     const imgWidth = 150;

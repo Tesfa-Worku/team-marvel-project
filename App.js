@@ -6,6 +6,7 @@ import SearchPage from './components/SearchPage';
 import Footer from './components/Footer';
 import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
+import ProfilePage from './components/ProfilePage';
 
 export default function App() {
   posts();
@@ -13,10 +14,11 @@ export default function App() {
 
   return (    
     <View>
+      <ProfilePage/> 
       <ImageGallery/>
       <SearchPage/>
       <Footer/>
-      <Messages/>      
+      <Messages/>     
     </View>
   );
 };

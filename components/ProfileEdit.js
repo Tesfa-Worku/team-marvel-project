@@ -5,5 +5,16 @@ import { users, media } from './WPAPIP';
 
 
 export default function ProfileEdit () {
-    const
+    const [userList, setUserList] = useState([]);
+    useEffect(
+        () => {
+            users()
+            .then(
+                (data) => setUserList(data)
+            )
+        },
+        []
+    )
+
+    const buildProfile = userList.map((user, index) => { })
 }
