@@ -1,16 +1,21 @@
 import React from 'react';
-//import { StyleSheet, View, } from 'react-native';
-//import { posts, users } from './components/WPAPI'; 
-//import Header from './components/Header';
-//import { View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import SearchPage from './components/SearchPage';
+import Footer from './components/Footer';
+import Messages from './components/Messages';
+import ImageGallery from './components/ImageGallery';
+import ResetPassword from './components/ResetPassword';
+import SignUp from './components/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
-import Drawer from './src/navigation/drawer';
+import Drawer from './components/navigation/drawer';
 
 export default function App() {
-    return (
-        <NavigationContainer>
-            <Drawer />
-        </NavigationContainer>
-    );
-}
+  return ( 
+    <NavigationContainer>
+        <Drawer />    
+    </NavigationContainer>   
+  );
+};
+
+
 

@@ -12,12 +12,11 @@ import {
     StatusBar,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-
-import Friends from '../../screens/Friends';
-import Images from '../../screens/Images';
-import Messages from '../../screens/Messages';
-import Profile from '../../screens/Profile';
-import Newsfeed from '../../screens/Newsfeed';
+import Friends from '../../Friends';
+import ImageGallery from '../../ImageGallery';
+import Messages from '../../Messages';
+import Profile from '../../Profile';
+import Newsfeed from '../../Newsfeed';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
@@ -63,10 +62,10 @@ const drawerContent = (props) => {
                         <Text>Friends</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Images')}
+                        onPress={() => props.navigation.navigate('ImageGallery')}
                         style={[
                             styles.btn,
-                            isActive(isWeb ? 'Images' : 1) && styles.activeBtn,
+                            isActive(isWeb ? 'ImageGallery' : 1) && styles.activeBtn,
                         ]}
                     >
                         <Text>Images</Text>
@@ -217,7 +216,7 @@ function Drawer() {
             }}
         >
             <DrawerNavigation.Screen name="Friends" component={Friends} />
-            <DrawerNavigation.Screen name="Images" component={Images} />
+            <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
@@ -261,5 +260,3 @@ const styles = StyleSheet.create({
 });
 
 export default Drawer;
-
-
