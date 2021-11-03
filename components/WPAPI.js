@@ -10,4 +10,3 @@ export const users = () => {
 
 export const media = () => {
     return fetch(`${BASE_URL}/wp/v2/media/`).then(response => response.json()).catch(error => console.log(error))
-}
