@@ -216,7 +216,7 @@ function Drawer() {
             }}
         >
             <DrawerNavigation.Screen name="Friends" component={Friends} />
-            <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
+            <DrawerNavigation.Screen name="Images" component={Images} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
@@ -260,3 +260,5 @@ const styles = StyleSheet.create({
 });
 
 export default Drawer;
+
+
