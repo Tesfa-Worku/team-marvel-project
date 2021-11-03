@@ -1,5 +1,6 @@
 const BASE_URL = 'https://jualuc1.dreamhosters.com/wp-json';
 const endpoint = {
+    // wordpress
     posts: '/wp/v2/posts',
     users: '/wp/v2/users',
     media: '/wp/v2/media',
@@ -8,7 +9,11 @@ const endpoint = {
     search: '/wp/v2/search',
     blockTypes: '/wp/v2/blockTypes',
     blocks: '/wp/v2/blocks',
-    pages: '/wp/v2/pages'
+    pages: '/wp/v2/pages',
+
+    // buddypress
+    members: '/buddypress/v1/members',
+    activity: '/buddypress/v1/activity',
 };
 
 export const WP_GET = (type, queryStringVars = '') => {
