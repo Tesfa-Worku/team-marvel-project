@@ -345,11 +345,11 @@ function Drawer() {
                     }),
             }}
         >
+            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Friends" component={Friends} />
             <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
-            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Login" component={Login} /> 
             <DrawerNavigation.Screen name="SignUp" component={SignUp} />
         </DrawerNavigation.Navigator>
