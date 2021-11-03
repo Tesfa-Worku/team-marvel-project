@@ -10,12 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Drawer from './components/navigation/drawer';
 
 export default function App() {
-  return ( 
-    // <View>
-    //   <SearchPage />
-    //   <ResetPassword />
-    //   <Footer />
-    // </View>
+  return (   
     <NavigationContainer>
         <Drawer />    
     </NavigationContainer>      
