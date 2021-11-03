@@ -11,9 +11,14 @@ import Drawer from './components/navigation/drawer';
 
 export default function App() {
   return ( 
+    // <View>
+    //   <SearchPage />
+    //   <ResetPassword />
+    //   <Footer />
+    // </View>
     <NavigationContainer>
         <Drawer />    
-    </NavigationContainer>   
+    </NavigationContainer>      
   );
 };
 

@@ -20,6 +20,7 @@ import Profile from '../../Profile';
 import Newsfeed from '../../Newsfeed';
 import Login from '../../Login';
 import SignUp from '../../SignUp';
+import ResetPassword from '../../ResetPassword';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
@@ -352,6 +353,7 @@ function Drawer() {
             <DrawerNavigation.Screen name="Profile" component={Profile} />
             <DrawerNavigation.Screen name="Login" component={Login} /> 
             <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+            <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
         </DrawerNavigation.Navigator>
     );
 }
