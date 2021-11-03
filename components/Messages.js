@@ -1,34 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     Text,
     View,
     Button,
     TextInput,
-    ScrollView,
-    Pressable,
-    Image
+    ScrollView
 } from 'react-native';
-import { WP_GET } from './WPAPI';
 
 export default function Messages() {
     const [messageArr, setMessageArr] = useState([
         {message: 'heeey :)'}
     ]);
     const [messageInput, setMessageInput] = useState('');
-    const [userData, setUserData] = useState([]);
-    const [selectedUser, setSelectedUser] = useState({});
-    useEffect(
-        () => {
-            WP_GET('users')
-            .then(
-                (data) => {
-                    setUserData(data);
-                }
-            )
-        },
-        [selectedUser]
-    )
+
+    // test object
+    const dummyData = {
+        name: 'Xavier',
+    }
 
 const sendMessage = () => {
     setMessageArr([...messageArr, {message: messageInput}]);
@@ -40,16 +29,6 @@ const deleteMessage = (index) => {
         messageArr.filter((text, selected) => selected != index)
         );
 }
-
-// click on name to get messages with specific id
-const userList = userData.map((user, index) => (
-    <View key={index}>
-        <Pressable onPress={() => setSelectedUser(user)}>
-            <Text>{user.name}</Text>
-        </Pressable>
-    </View>
-    )
-)
 
 const generateConversation = messageArr.map((text, index) => (
     <View key={index}>
@@ -64,13 +43,9 @@ const generateConversation = messageArr.map((text, index) => (
 )
 
 const MessageWindow = () => {
-    return selectedUser && (
+    return (
         <View>
-            <Image
-                style={styles.image}
-                source={{uri: selectedUser.avatar_urls?.['24']}}
-            />
-            <Text>{selectedUser.name}</Text>
+            <Text>{dummyData.name}</Text>
             <ScrollView>
                 {generateConversation}
             </ScrollView>
@@ -92,13 +67,8 @@ const MessageWindow = () => {
 }
 
 return (
-    <View>
-        <View style={styles.sidebar}>
-            {userList}
-        </View>
-        <View style={styles.container}>
-            {MessageWindow()}
-        </View>
+    <View style={styles.container}>
+        {MessageWindow()}
     </View>
     )
 }
@@ -109,12 +79,5 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    sidebar: {
-        float: 'left',
-    },
-    image: {
-        height: 24,
-        width: 24,
     },
 });
