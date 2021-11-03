@@ -1,19 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { posts, users } from './components/WPAPI'; 
+import { posts, users } from './components/WPAPI';
 import ProfilePage from './components/ProfilePage';
 import ProfileEdit from './components/ProfileEdit';
-import Messages from './components/Messages';
+import SearchPage from './components/SearchPage';
 import Footer from './components/Footer';
-import Header from '.components/Header';
+import Messages from './components/Messages';
+import ImageGallery from './components/ImageGallery';
+import ResetPassword from './components/ResetPassword';
+import SignUp from './components/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   posts();
   users();
   return (
     <>
-      <Header / >
-      <ProfilePage />
+      
+      
+      <ProfileEdit />
       <Footer />
     </>
   );
