@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
 import ProfilePage from './components/ProfilePage';
+import ProfileEdit from './components/ProfileEdit';
 
 export default function App() {
   posts();
@@ -14,7 +15,8 @@ export default function App() {
 
   return (    
     <View>
-      <ProfilePage/> 
+      <ProfilePage/>
+      <ProfileEdit/>
       <ImageGallery/>
       <SearchPage/>
       <Footer/>

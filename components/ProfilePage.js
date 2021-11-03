@@ -61,12 +61,6 @@ export default function ProfilePage () {
     </View>
   )
   }
-  <View>
-
-  </View>
-
-
-
 
 
     const styles = StyleSheet.create({
