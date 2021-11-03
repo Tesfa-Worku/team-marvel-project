@@ -6,17 +6,16 @@ import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
 import ResetPassword from './components/ResetPassword';
 import SignUp from './components/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
+import Drawer from './components/navigation/drawer';
 
 export default function App() {
-  return (    
-    <View>      
-      <ImageGallery/>
-      <SearchPage/>      
-      <Messages/>
-      <ResetPassword/>
-      <Footer/>      
-    </View>
+  return ( 
+    <NavigationContainer>
+        <Drawer />    
+    </NavigationContainer>   
   );
 };
+
 
 
