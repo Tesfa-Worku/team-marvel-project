@@ -58,6 +58,7 @@ const ResetPassword = () => {
     
         <View>
             <Button 
+                color='#F0131E'
                 title="Reset" 
                 onPress={handleSubmit(onSubmit)} 
             />
