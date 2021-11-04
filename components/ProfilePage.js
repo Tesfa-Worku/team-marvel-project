@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet,Text, View, Image } from 'react-native';
-import { users, media } from './WPAPI';
+import { WP_GET } from './WPAPI';
 
 
 export default function ProfilePage () {
   const [userList, setUserList] = useState([]);
   useEffect(
       () => {
-          users()
+          WP_GET("users")
           .then(
               (data) => setUserList(data)
           )
