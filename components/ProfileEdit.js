@@ -29,7 +29,7 @@ export default function ProfileEdit () {
                 *** PROFILE IMAGES GO HERE***
                 <Button
                     title="Edit profile photo..." 
-                    color='#F0131E'
+                    color='#F0131'
                 />
 
                 

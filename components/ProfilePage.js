@@ -73,34 +73,54 @@ export default function ProfilePage () {
           </View>
         </View>
         <View> 
-          <Button 
-            title="Edit Profile"
-            color='#F0131E'
-          />
+            <Button 
+              title="Edit Profile"
+              color='#F0131E'
+              
+            />
+          
         </View>
 
-        <View style={styles.contact}>
-          <Text>
-            <h3>CONTACT</h3>
-            <h4>Add Friend</h4>
-            <h4>Send Message</h4>
-            <h4>Add to Group</h4>
-            <h4>Share</h4>
-            <h4>Block User</h4>
-            <h4>Report User</h4>
-          </Text>
+        <View style={styles.contactwrapper}>
+          <View style={styles.contactheader}>
+              <Text>
+                <h3>CONTACT</h3>
+              </Text>
+          </View>
+          <View style={styles.contactinformation}>
+            <View style={styles.contactleft}>
+              <Text>
+                  <h4>Add Friend</h4>
+                  <h4>Send Message</h4>
+                  <h4>Add to Group</h4>
+                </Text>
+            </View>
+            <View style={styles.contactright}>
+              <Text>
+                <h4>Share</h4>
+                <h4>Block User</h4>
+                <h4>Report User</h4>
+              </Text>
+            </View>
+          </View>
         </View>
         
-        <View style={styles.interests}>
-          <Text>
-            <h3>INTERESTS</h3>
-            <h4>General</h4>
-            <h4>Music</h4>
-            <h4>Movies</h4>
-            <h4>Television</h4>
-            <h4>Books</h4>
-            <h4>Powers</h4>
-          </Text>
+        <View style={styles.interestswrapper}>
+          <View style={styles.interestsheader}>
+            <Text>
+              <h3>INTERESTS</h3>
+            </Text>
+          </View>
+          <View style={styles.interestsinformation}>
+            <Text>
+              <h4>General</h4>
+              <h4>Music</h4>
+              <h4>Movies</h4>
+              <h4>Television</h4>
+              <h4>Books</h4>
+              <h4>Powers</h4>
+            </Text>
+          </View>
         </View>
 
       </View>
@@ -132,6 +152,11 @@ export default function ProfilePage () {
           justifyContent: 'center',
         },
 
+        h3: {
+          color: '#F0131E',
+        },
+
+
         profilepage: {
           display: 'flex',
           flexDirection: 'row',
@@ -157,15 +182,44 @@ export default function ProfilePage () {
           justifyContent: 'space-between',
         },
 
-        contact: {
-          backgroundColor: 'lightgrey',
+        contactwrapper: {
+          justifyContent: 'space-around',
+          margin: 10,
+          borderWidth: 4,
+          borderColor: '#F0131E',
 
         },
 
-        interests: {
-          backgroundColor: 'lightgrey',
+        contactheader: {
+          backgroundColor: '#F0131E',
+          justifyContent: 'space-around'
+          
+        },
+
+        contactinformation: {
+          display:'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',    
+        },
+
+        interestswrapper: {
+          justifyContent: 'space-around',
+          margin: 10,
+          borderWidth: 4,
+          borderColor: '#F0131E',
 
         },
+
+        interestsheader: {
+          backgroundColor: '#F0131E',
+
+        },
+
+
+        interestsinformation: {
+          margin: 5,
+        },
+
 
         userposts: {
           backgroundColor: 'lightgrey',
