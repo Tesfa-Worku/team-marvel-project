@@ -17,7 +17,10 @@ export default function ProfileEdit () {
         <>
         
         <ProfilePage />
-            <Button title="Edit your profile..." />
+            <Button 
+                title="Edit your profile..."
+                color='#F0131E'     
+            />
             <View style={styles.container}>
             <Text>
                 Profile Edit Page
@@ -26,6 +29,7 @@ export default function ProfileEdit () {
                 *** PROFILE IMAGES GO HERE***
                 <Button
                     title="Edit profile photo..." 
+                    color='#F0131E'
                 />
 
                 
