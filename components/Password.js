@@ -20,6 +20,7 @@ export const checkPasswordStrength = (passwordInput) => {
             </Text>
             <View>
                 <Button
+                    color='#F0131E'
                     title='OK'
                     onPress={() => setAlertWeak(!alertWeak)}
                     />

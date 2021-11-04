@@ -4,7 +4,6 @@ import {
     Text,
     View,
     Button,
-    ScrollView,
     Image
 } from 'react-native';
 import { WP_GET } from './WPAPI';
@@ -38,40 +37,55 @@ const deleteImage = (index) => {
 }
 
 const generateGallery = imageArr.map((img, index) => {
-    const imgWidth = 300;
+    // imgWidth: 40vh
+    // const imgWidth = document.documentElement.clientHeight * 0.40;
+    const imgWidth = 250;
     const imgHeight = (img.media_details.height / img.media_details.width) * imgWidth;
     
     return(
-        <View
-            key={index} >
-            <Image
-                style={{width: imgWidth, height: imgHeight}}
-                source={img.source_url}
-            />
-            <Button
-                key={index}
-                onPress={() => deleteImage(index)}
-                title='Delete'
-            />
+        <View>
+            <View
+                style={styles.imageRow}
+                key={index} >
+                <Image
+                    style={{width: imgWidth, height: imgHeight}}
+                    source={img.source_url}
+                />
+            </View>
+            <View>
+                <Button
+                    color='#F0131E'
+                    key={index}
+                    onPress={() => deleteImage(index)}
+                    title='Delete'
+                />
+            </View>
         </View>
         )
     }
 )
 
 return (
-    <View style={styles.container}>
-        <Text>Images</Text>
-        <ScrollView>
+    <View>
+        <View style={styles.container}>
+            <Text>Images</Text>
+            <View style={styles.buttonContainer}>
+                <Button
+                    color='#F0131E'
+                    onPress={uploadImage}
+                    title='Upload'
+                />
+                <View style={styles.spacing} />
+                <Button
+                    color='#F0131E'
+                    onPress={sendImage}
+                    title='Send'
+                />
+            </View>
+        </View>
+        <View style={styles.imageContainer}>   
             {generateGallery}
-        </ScrollView>
-        <Button
-            onPress={uploadImage}
-            title='Upload'
-        />
-        <Button
-            onPress={sendImage}
-            title='Send'
-        />
+        </View>
     </View>
     )
 }
@@ -84,10 +98,24 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     image: {
-        height: 600,
-        width: 400,
         minHeight: '100%',
         minWidth: '100%',
-        padding: 10,
+        objectFit: 'cover',
+    },
+    imageContainer: {
+        backgroundColor: '#fff',
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+    imageRow: {
+        height: 'auto',
+        flexGrow: 1,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+    },
+    spacing: {
+        width: 5,
     },
 });
