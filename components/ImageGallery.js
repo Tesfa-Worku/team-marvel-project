@@ -54,6 +54,7 @@ const generateGallery = imageArr.map((img, index) => {
             </View>
             <View>
                 <Button
+                    color='#F0131E'
                     key={index}
                     onPress={() => deleteImage(index)}
                     title='Delete'
@@ -70,11 +71,13 @@ return (
             <Text>Images</Text>
             <View style={styles.buttonContainer}>
                 <Button
+                    color='#F0131E'
                     onPress={uploadImage}
                     title='Upload'
                 />
                 <View style={styles.spacing} />
                 <Button
+                    color='#F0131E'
                     onPress={sendImage}
                     title='Send'
                 />

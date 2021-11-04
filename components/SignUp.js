@@ -89,6 +89,7 @@ return (
                 placeholder='Confirm password'
             />
             <Button
+                color='#F0131E'
                 title='Sign Up'
                 // onPress={() => handleOnSubmit()}
             />
