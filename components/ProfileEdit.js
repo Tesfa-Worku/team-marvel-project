@@ -22,6 +22,13 @@ export default function ProfileEdit () {
             <Text>
                 Profile Edit Page
             </Text>
+            <View>
+                *** PROFILE IMAGES GO HERE***
+                <Button
+                    title="Edit profile photo..." 
+                />
+
+                
 
             PROFILE EDIT AREA GOES HERE:
             -Image Gallery
@@ -45,6 +52,8 @@ export default function ProfileEdit () {
             </View>            
 
             </View>
+
+        </View>
         </>
 
         
@@ -53,7 +62,7 @@ export default function ProfileEdit () {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    editform: {
         flex: 1,
         backgroundColor: '#fff',
     },
