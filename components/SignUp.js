@@ -26,11 +26,11 @@ export default function SignUp() {
     const passwordRef = createRef();
 
 const validateForm = (passwordInput) => {
-    if (!firstName) alert('Please enter first name.');
-    if (!lastName) alert('Please enter last name.');
-    if (!email) alert('Please enter email.');
-    if (!userName) alert('Please enter username.');
-    if (!password || !confirmPassword) alert('Please enter password');
+    if (!firstName || typeof firstName !== 'string') alert('Please enter first name.');
+    if (!lastName || typeof lastName !== 'string') alert('Please enter last name.');
+    if (!email || typeof email !== 'string') alert('Please enter email.');
+    if (!userName || typeof userName !== 'string') alert('Please enter username.');
+    if ((!password || !confirmPassword) || typeof password !== 'string') alert('Please enter password');
 
     checkPasswordStrength(passwordInput);
 
