@@ -13,16 +13,10 @@ import SignUp from './components/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
-  posts();
-  users();
-  return (
-    <>
-      
-      
-      <ProfileEdit />
-      <Newsfeed />
-      <Footer />
-    </>
+  return (    
+    <NavigationContainer>
+        <Drawer />    
+    </NavigationContainer>      
   );
 }
 
