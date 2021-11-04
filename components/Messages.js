@@ -34,6 +34,7 @@ const generateConversation = messageArr.map((text, index) => (
     <View key={index}>
         <Text>{text.message}</Text>
         <Button
+            color='#F0131E'
             key={index}
             onPress={() => deleteMessage(index)}
             title='Delete'
@@ -58,7 +59,8 @@ const MessageWindow = () => {
                     placeholder='Write a message...'
                 />
             </View>
-            <Button 
+            <Button
+                color='#F0131E'
                 onPress={sendMessage}
                 title='Send'
             />

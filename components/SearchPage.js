@@ -15,6 +15,7 @@ export default function SearchPage() {
         />
         <View>
             <Button
+                color='#F0131E'
                 title="Search"
                 color="blue"          
                 // onPress={}
