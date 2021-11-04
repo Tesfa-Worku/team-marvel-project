@@ -16,7 +16,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Friends from '../../Friends';
 import ImageGallery from '../../ImageGallery';
 import Messages from '../../Messages';
-import Profile from '../../Profile';
+import ProfilePage from '../../ProfilePage';
 import Newsfeed from '../../Newsfeed';
 import Login from '../../Login';
 import SignUp from '../../SignUp';
@@ -187,12 +187,12 @@ const webHeadder = (props) => {
                     </TouchableOpacity>
                     <Text style={{ marginHorizontal: 4 }}>|</Text>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Profile')}
+                        onPress={() => props.navigation.navigate('ProfilePage')}
                     >
                         <Text
                             style={[
                                 styles.white,
-                                isActive('Profile') && styles.black,
+                                isActive('ProfilePage') && styles.black,
                             ]}
                         >
                             Profile
@@ -250,7 +250,7 @@ const drawerContent = (props) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Profile')}
+                        onPress={() => props.navigation.navigate('ProfilePage')}
                         style={[styles.btn, isActive() && styles.activeBtn]}
                     >
                         <Text>Profile</Text>
@@ -351,8 +351,8 @@ function Drawer() {
             <DrawerNavigation.Screen name="Friends" component={Friends} />
             <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
-            <DrawerNavigation.Screen name="Profile" component={Profile} />
-            <DrawerNavigation.Screen name="Login" component={() => <Login setLoggedIn={setLoggedIn} /> } /> 
+            <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
+            <DrawerNavigation.Screen name="Login" component={Login} /> 
             <DrawerNavigation.Screen name="SignUp" component={SignUp} />
             <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
         </DrawerNavigation.Navigator>
