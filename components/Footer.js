@@ -39,18 +39,12 @@ export default function Footer() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-around',        
-        padding: 20,
-        marginTop: 500,
+    container: {   
         backgroundColor: 'gray',
     },
     developerSection:{
         flexDirection: 'row',
-        justifyContent: 'center',
-        padding: 10,
+        justifyContent: 'center',        
     },
     linksWrapper: {
         flexDirection: 'row',
@@ -59,7 +53,6 @@ const styles = StyleSheet.create({
     },
     rightsReserved: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 10,
+        justifyContent: 'space-around',        
     }
 });
