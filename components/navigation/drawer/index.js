@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
     View,
@@ -12,21 +12,199 @@ import {
     StatusBar,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+
 import Friends from '../../Friends';
 import ImageGallery from '../../ImageGallery';
 import Messages from '../../Messages';
 import Profile from '../../Profile';
 import Newsfeed from '../../Newsfeed';
+import Login from '../../Login';
+import SignUp from '../../SignUp';
+import ResetPassword from '../../ResetPassword';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
 
+const webHeadder = (props) => {
+    const { showInput, setShowInput } = props;
+    const isActive = (nameOrIndex) => {
+        return props.route.name === nameOrIndex;
+    };
+
+    const { loggedIn, setLoggedIn } = props;
+
+    return (
+        <SafeAreaView
+            {...props}
+            style={{
+                marginTop: 0,
+                flex: 1,
+            }}
+        >
+            <View
+                style={{
+                    flex: 1,
+                }}
+            >
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        marginBottom: 8,
+                    }}
+                >
+                    <TouchableOpacity onPress = {() => props.navigation.navigate('Newsfeed')}>
+                    <Text
+                        style={[{ fontSize: 20, marginLeft: 10 }, styles.white]}
+                    >
+                        Marvel&nbsp;Space
+                    </Text>
+                    </TouchableOpacity>
+                    <View
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                        {/* <TextInput
+                            placeholder="Search"
+                            style={styles.webInput}
+                        />
+                        <TouchableOpacity
+                            style={{ padding: 8, backgroundColor: '#fff' }}
+                        >
+                            <Text>Search</Text>
+                        </TouchableOpacity> */}
+                        <Image
+                            source={require('../../Images/Logo.png')}
+                            width={64}
+                            height={32}
+                            style={{ width: 64, height: 32 }}
+                            resizeMode="contain"
+                        />
+                    </View>
+                    <View>
+                        {loggedIn ? (
+                            <TouchableOpacity
+                                onPress={() => setLoggedIn(!loggedIn)}
+                            >
+                                <Text style={styles.white}>Logout</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        props.navigation.navigate('Login');
+                                    }}
+                                >
+                                    <Text 
+                                        style={[
+                                            styles.white,
+                                            isActive('Login') && styles.black,
+                                        ]}
+                                    >
+                                        Login
+                                    </Text>
+                                </TouchableOpacity>
+                                <Text style={{ marginHorizontal: 4 }}>|</Text>
+                                <TouchableOpacity 
+                                    onPress={() => {
+                                        props.navigation.navigate('SignUp');
+                                    }}
+                                >
+                                    <Text 
+                                        style={[
+                                            styles.white,
+                                            isActive('SignUp') && styles.black,
+                                        ]}
+                                    >
+                                        SignUp
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        {showInput ? (
+                            <></>
+                        ) : (
+                            <TouchableOpacity
+                                onPress={() => setShowInput(true)}
+                                style={{ flex: 0 }}
+                            >
+                                <AntDesign
+                                    name="search1"
+                                    size={24}
+                                    color="black"
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </View>
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        marginHorizontal: 12,
+                        flexWrap: 'wrap',
+                    }}
+                >
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Friends')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('Friends') && styles.black,
+                            ]}
+                        >
+                            Friends
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={{ marginHorizontal: 4 }}>|</Text>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('ImageGallery')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('ImageGallery') && styles.black,
+                            ]}
+                        >
+                            Images
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={{ marginHorizontal: 4 }}>|</Text>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Messages')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('Messages') && styles.black,
+                            ]}
+                        >
+                            Messages
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={{ marginHorizontal: 4 }}>|</Text>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('Profile')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('Profile') && styles.black,
+                            ]}
+                        >
+                            Profile
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </SafeAreaView>
+    );
+};
+
 const drawerContent = (props) => {
     const isActive = (nameOrIndex) => {
-        if (isWeb) {
-            return props.route.name === nameOrIndex;
-        }
-
         return props.state && props.state.index === nameOrIndex;
     };
 
@@ -40,101 +218,53 @@ const drawerContent = (props) => {
             <View
                 style={{
                     flex: 1,
-                    flexDirection: isWeb ? 'row' : 'column',
+                    flexDirection: 'column',
                 }}
             >
                 <View
                     style={{
                         flex: 1,
-                        flexDirection: isWeb ? 'row' : 'column',
-                        justifyContent: isWeb ? 'flex-end' : undefined,
-                        marginHorizontal: isWeb ? 12 : 0,
-                        flexWrap: isWeb ? 'wrap' : 'nowrap',
+                        flexDirection: 'column',
+                        marginHorizontal: 0,
+                        flexWrap: 'nowrap',
                     }}
                 >
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('Friends')}
-                        style={[
-                            styles.btn,
-                            isActive(isWeb ? 'Friends' : 0) && styles.activeBtn,
-                        ]}
+                        style={[styles.btn, isActive(0) && styles.activeBtn]}
                     >
                         <Text>Friends</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('ImageGallery')}
-                        style={[
-                            styles.btn,
-                            isActive(isWeb ? 'ImageGallery' : 1) && styles.activeBtn,
-                        ]}
+                        style={[styles.btn, isActive(1) && styles.activeBtn]}
                     >
                         <Text>Images</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('Messages')}
-                        style={[
-                            styles.btn,
-                            isActive(isWeb ? 'Messages' : 2) &&
-                                styles.activeBtn,
-                        ]}
+                        style={[styles.btn, isActive(2) && styles.activeBtn]}
                     >
                         <Text>Messages</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Newsfeed')}
-                        style={[
-                            styles.btn,
-                            isActive(isWeb ? 'Newsfeed' : 3) &&
-                                styles.activeBtn,
-                        ]}
-                    >
-                        <Text>Newsfeed</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate('Profile')}
-                        style={[
-                            styles.btn,
-                            isActive(isWeb ? 'Profile' : 4) && styles.activeBtn,
-                        ]}
+                        style={[styles.btn, isActive() && styles.activeBtn]}
                     >
                         <Text>Profile</Text>
                     </TouchableOpacity>
                 </View>
-                {isWeb ? (
-                    <>
-                        {loggedIn ? (
-                            <TouchableOpacity
-                                onPress={() => setLoggedIn(!loggedIn)}
-                            >
-                                <Text>Logout</Text>
-                            </TouchableOpacity>
-                        ) : (
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity
-                                    onPress={() => setLoggedIn(!loggedIn)}
-                                >
-                                    <Text>Login</Text>
-                                </TouchableOpacity>
-                                <Text style={{ marginHorizontal: 4 }}>|</Text>
-                                <TouchableOpacity>
-                                    <Text>SignUp</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-                    </>
-                ) : (
-                    <TouchableOpacity
-                        style={[styles.btn, styles.btnDanger]}
-                        onPress={() => {
-                            setLoggedIn && setLoggedIn(!loggedIn);
-                        }}
-                    >
-                        <Text style={styles.textDanger}>
-                            {loggedIn ? 'Logout' : 'Login'}
-                        </Text>
-                    </TouchableOpacity>
-                )}
+                <TouchableOpacity
+                    style={[styles.btn, styles.btnDanger]}
+                    onPress={() => {
+                        setLoggedIn && setLoggedIn(!loggedIn);
+                    }}
+                >
+                    <Text style={styles.textDanger}>
+                        {loggedIn ? 'Logout' : 'Login'}
+                    </Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -160,7 +290,7 @@ const header = (props) => {
                     <View>
                         {!isWeb && (
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                                Marvel Space
+                                MARVELSPACE
                             </Text>
                         )}
                         {Platform.OS !== 'web' && (
@@ -176,22 +306,23 @@ const header = (props) => {
                         )}
                     </View>
                     <View style={{ alignItems: 'center' }}>
-                        {isWeb && (
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                                Title
-                            </Text>
+                        {Platform.OS === 'web' ? (
+                            <></>
+                        ) : (
+                            <Image
+                                source={require('../../Images/Logo.png')}
+                                width={64}
+                                height={32}
+                                style={{ width: 64, height: 32 }}
+                            />
                         )}
-                        <Image
-                            source={require('../../Images/Logo.png')}
-                            width={64}
-                            height={32}
-                            style={{ width: 64, height: 32 }}
-                        />
                     </View>
-                    {isWeb && drawerContent(props)}
-                    <TouchableOpacity onPress={() => setShowInput(true)}>
-                        <AntDesign name="search1" size={24} color="black" />
-                    </TouchableOpacity>
+                    {isWeb && webHeadder(props)}
+                    {Platform.OS !== 'web' && (
+                        <TouchableOpacity onPress={() => setShowInput(true)}>
+                            <AntDesign name="search1" size={24} color="black" />
+                        </TouchableOpacity>
+                    )}
                 </>
             )}
         </View>
@@ -215,11 +346,14 @@ function Drawer() {
                     }),
             }}
         >
+            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Friends" component={Friends} />
             <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
-            <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
+            <DrawerNavigation.Screen name="Login" component={Login} /> 
+            <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+            <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
         </DrawerNavigation.Navigator>
     );
 }
@@ -235,7 +369,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingVertical: 12,
         paddingHorizontal: 8,
-        backgroundColor: '#00f',
+        backgroundColor: '#f00',
         alignItems: 'center',
     },
     btnDanger: {
@@ -257,6 +391,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     inputCloseIcon: { marginLeft: 8 },
+    webInput: {
+        backgroundColor: '#fff',
+        padding: 8,
+        marginRight: 8,
+    },
+    white: {
+        color: '#fff',
+    },
+    black: {
+        color: '#000',
+    },
 });
 
 export default Drawer;
+
+
