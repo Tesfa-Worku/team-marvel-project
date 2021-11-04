@@ -84,9 +84,10 @@ const webHeadder = (props) => {
                     <View>
                         {loggedIn ? (
                             <TouchableOpacity
+                                style={[styles.btn, styles.btnDanger]}
                                 onPress={() => setLoggedIn(!loggedIn)}
                             >
-                                <Text style={styles.white}>Logout</Text>
+                                <Text style={styles.white}>{loggedIn ? 'Logout' : 'Login'}</Text>
                             </TouchableOpacity>
                         ) : (
                             <View style={{ flexDirection: 'row' }}>
@@ -290,7 +291,7 @@ const header = (props) => {
                     <View>
                         {!isWeb && (
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                                MARVELSPACE
+                                MARVEL SPACE
                             </Text>
                         )}
                         {Platform.OS !== 'web' && (
@@ -351,7 +352,7 @@ function Drawer() {
             <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="Profile" component={Profile} />
-            <DrawerNavigation.Screen name="Login" component={Login} /> 
+            <DrawerNavigation.Screen name="Login" component={() => <Login setLoggedIn={setLoggedIn} /> } /> 
             <DrawerNavigation.Screen name="SignUp" component={SignUp} />
             <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
         </DrawerNavigation.Navigator>
