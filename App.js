@@ -4,6 +4,7 @@ import { posts, users } from './components/WPAPI';
 import ProfilePage from './components/ProfilePage';
 import ProfileEdit from './components/ProfileEdit';
 import SearchPage from './components/SearchPage';
+import Newsfeed from './components/Newsfeed';
 import Footer from './components/Footer';
 import Messages from './components/Messages';
 import ImageGallery from './components/ImageGallery';
@@ -19,6 +20,7 @@ export default function App() {
       
       
       <ProfileEdit />
+      <Newsfeed />
       <Footer />
     </>
   );

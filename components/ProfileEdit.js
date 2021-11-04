@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { StyleSheet, Text, Button,View, Image, SafeAreaView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ProfilePage from './ProfilePage';
+import Footer from './Footer';
 
 
 
@@ -14,28 +15,35 @@ export default function ProfileEdit () {
    
     return(
         <>
+        
         <ProfilePage />
-            <Button
-             title="Edit your profile..."   
-            />
+            <Button title="Edit your profile..." />
             <View style={styles.container}>
             <Text>
                 Profile Edit Page
             </Text>
 
-            <SafeAreaView>
-                <Text>Profile Name</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeText}
-                    value="Edit Profile Name here..." />
-                <Text>Location</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeText}
-                    value="Edit Location here..." />
+            PROFILE EDIT AREA GOES HERE:
+            -Image Gallery
+            <View>
+                <Button title="Edit profile photo" />
+                <SafeAreaView>
+                    <Text>Profile Name</Text>
+                    <TextInput label="Profile Name"
+                        style={styles.input}
+                        onChangeText={onChangeText}
+                        value="Edit Profile Name here..." 
+                    />
+                    <Text>Location</Text>
+                    <TextInput 
+                        style={styles.input}
+                        onChangeText={onChangeText}
+                        value="Edit Location here..." 
+                    />
+                </SafeAreaView>
+                <Button title="Submit..." />
+            </View>            
 
-            </SafeAreaView>
             </View>
         </>
 
@@ -47,7 +55,7 @@ export default function ProfileEdit () {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'hotpink',
+        backgroundColor: '#fff',
     },
     input: {
         height: 40,
