@@ -12,7 +12,8 @@ import Drawer from './components/navigation/drawer';
 export default function App() {
   return (   
     <NavigationContainer>
-        <Drawer />    
+        <Drawer />
+        <Footer />    
     </NavigationContainer>      
   );
 };
