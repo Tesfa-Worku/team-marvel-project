@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Comp } from 'react';
 import { render } from 'react-dom';
-import { StyleSheet, Text, Button,View, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, Button,View, Image, SafeAreaView, Platform } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ProfilePage from './ProfilePage';
 import Footer from './Footer';

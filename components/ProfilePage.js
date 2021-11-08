@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
-import { StyleSheet,Text, View, Image, Button } from 'react-native';
+import { StyleSheet,Text, View, Image, Button, Platform } from 'react-native';
 import { WP_GET } from './WPAPI';
 
 
