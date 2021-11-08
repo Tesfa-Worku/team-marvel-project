@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     image: {
         minHeight: '100%',
         minWidth: '100%',
-        objectFit: 'cover',
+        //objectFit: 'cover',
     },
     imageContainer: {
         backgroundColor: '#fff',
