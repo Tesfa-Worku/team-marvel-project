@@ -5,10 +5,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import ProfilePage from './ProfilePage';
 import Footer from './Footer';
 
-
-
-
-
 export default function ProfileEdit () {
     const [text, onChangeText] = React.useState("Useless Text");
     const [number, onChangeNumber] =React.useState(null);
@@ -26,7 +22,7 @@ export default function ProfileEdit () {
                 Profile Edit Page
             </Text>
             <View>
-                *** PROFILE IMAGES GO HERE***
+                {/* *** PROFILE IMAGES GO HERE*** */}
                 <Button
                     title="Edit profile photo..." 
                     color='#F0131'
@@ -34,8 +30,8 @@ export default function ProfileEdit () {
 
                 
 
-            PROFILE EDIT AREA GOES HERE:
-            -Image Gallery
+            {/* PROFILE EDIT AREA GOES HERE:
+            -Image Gallery */}
             <View>
                 <Button title="Edit profile photo" />
                 <SafeAreaView>

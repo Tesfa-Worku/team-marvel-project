@@ -15,19 +15,17 @@ export default function ProfilePage () {
       },
       []
   )
-  //console.log(userList)
 
   const buildProfile = userList.map((user, index) => {
-    const imgWidth = 150;
-    const imgHeight = 150;
-    //const imgHeight = (user.media_details.height / user.media_details.width) * imgWidth;
-    console.log(Object.values(user.avatar_urls)[2])
+    const imgWidth = 96;
+    const imgHeight = 96;
+    
     return(
         <View
             key={index} >
             <Image
                 style={{width: imgWidth, height: imgHeight}}
-                source={Object.values(user.avatar_urls)[2]}
+                source={{uri: user.avatar_urls?.['96']}}
             />
         </View>
         )
@@ -84,22 +82,22 @@ export default function ProfilePage () {
         <View style={styles.contactwrapper}>
           <View style={styles.contactheader}>
               <Text>
-                <h3>CONTACT</h3>
+                CONTACT
               </Text>
           </View>
           <View style={styles.contactinformation}>
             <View style={styles.contactleft}>
               <Text>
-                  <h4>Add Friend</h4>
-                  <h4>Send Message</h4>
-                  <h4>Add to Group</h4>
+                  Add Friend
+                  Send Message
+                  Add to Group
                 </Text>
             </View>
             <View style={styles.contactright}>
               <Text>
-                <h4>Share</h4>
-                <h4>Block User</h4>
-                <h4>Report User</h4>
+                Share
+                Block User
+                Report User
               </Text>
             </View>
           </View>
@@ -108,17 +106,17 @@ export default function ProfilePage () {
         <View style={styles.interestswrapper}>
           <View style={styles.interestsheader}>
             <Text>
-              <h3>INTERESTS</h3>
+              INTERESTS
             </Text>
           </View>
           <View style={styles.interestsinformation}>
             <Text>
-              <h4>General</h4>
-              <h4>Music</h4>
-              <h4>Movies</h4>
-              <h4>Television</h4>
-              <h4>Books</h4>
-              <h4>Powers</h4>
+              General
+              Music
+              Movies
+              Television
+              Books
+              Powers
             </Text>
           </View>
         </View>
@@ -128,15 +126,15 @@ export default function ProfilePage () {
         
         
         <View style={styles.userposts}>
-          *** USER'S POSTS ***
+          {/* *** USER'S POSTS *** */}
         </View>
 
         <View style={styles.userfriendspost}>
-          *** USER FRIENDS POST ***
+          {/* *** USER FRIENDS POST *** */}
         </View>
 
         <View style={styles.friendscomments}>
-          *** USER'S FRIENDS COMMENTS ***
+          {/* *** USER'S FRIENDS COMMENTS *** */}
         </View>
       </View>
     </View>
