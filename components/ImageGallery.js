@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Button,
-    Image
+    Image,
+    ScrollView
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
@@ -43,13 +44,13 @@ const generateGallery = imageArr.map((img, index) => {
     const imgHeight = (img.media_details.height / img.media_details.width) * imgWidth;
     
     return(
-        <View>
+        <View key={index}>
             <View
                 style={styles.imageRow}
                 key={index} >
                 <Image
                     style={{width: imgWidth, height: imgHeight}}
-                    source={img.source_url}
+                    source={{uri: img.source_url}}
                 />
             </View>
             <View>
@@ -100,7 +101,6 @@ const styles = StyleSheet.create({
     image: {
         minHeight: '100%',
         minWidth: '100%',
-        objectFit: 'cover',
     },
     imageContainer: {
         backgroundColor: '#fff',

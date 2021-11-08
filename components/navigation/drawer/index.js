@@ -25,7 +25,7 @@ import ResetPassword from '../../ResetPassword';
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
 
-const webHeadder = (props) => {
+const webHeader = (props) => {
     const { showInput, setShowInput } = props;
     const isActive = (nameOrIndex) => {
         return props.route.name === nameOrIndex;
@@ -290,9 +290,11 @@ const header = (props) => {
                 <>
                     <View>
                         {!isWeb && (
+                            <TouchableOpacity onPress = {() => props.navigation.navigate('Newsfeed')}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                                 MARVEL SPACE
                             </Text>
+                            </TouchableOpacity>
                         )}
                         {Platform.OS !== 'web' && (
                             <TouchableOpacity
@@ -318,7 +320,7 @@ const header = (props) => {
                             />
                         )}
                     </View>
-                    {isWeb && webHeadder(props)}
+                    {isWeb && webHeader(props)}
                     {Platform.OS !== 'web' && (
                         <TouchableOpacity onPress={() => setShowInput(true)}>
                             <AntDesign name="search1" size={24} color="black" />

@@ -23,10 +23,12 @@ export default function Friends() {
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
+            {console.log(user)}
             <Pressable onPress={() => console.log(user.id)}>
                 <View style={styles.imageRow} >
                     <Image
                         style={{width: 96, height: 96}}
+                        //helper function to check if avatar_urls exists and add https to avatar_urls
                         source={{uri: user.avatar_urls?.['96']}}
                     />
                     <Text>{user.name}</Text>
@@ -59,7 +61,6 @@ const styles = StyleSheet.create({
     image: {
         minHeight: '100%',
         minWidth: '100%',
-        objectFit: 'cover',
     },
     imageContainer: {
         backgroundColor: '#fff',

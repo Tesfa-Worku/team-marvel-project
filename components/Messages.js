@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     sidebar: {
-        float: 'left',
+        // float: 'left',
     },
     image: {
         height: 24,

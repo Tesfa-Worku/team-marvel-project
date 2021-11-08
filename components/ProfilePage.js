@@ -18,16 +18,15 @@ export default function ProfilePage () {
   //console.log(userList)
 
   const buildProfile = userList.map((user, index) => {
-    const imgWidth = 150;
-    const imgHeight = 150;
-    //const imgHeight = (user.media_details.height / user.media_details.width) * imgWidth;
-    console.log(Object.values(user.avatar_urls)[2])
+    const imgWidth = 96;
+    const imgHeight = 96;
+    
     return(
         <View
             key={index} >
             <Image
                 style={{width: imgWidth, height: imgHeight}}
-                source={Object.values(user.avatar_urls)[2]}
+                source={{uri: user.avatar_urls?.['96']}}
             />
         </View>
         )
