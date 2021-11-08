@@ -25,7 +25,7 @@ export default function ProfilePage () {
             key={index} >
             <Image
                 style={{width: imgWidth, height: imgHeight}}
-                source={{uri: user.avatar_urls?.['96']}}
+                source={{uri: user.avatar_urls?.['96'].startsWith('https:') ? user.avatar_urls?.['96'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
             />
         </View>
         )

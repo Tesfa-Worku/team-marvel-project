@@ -23,13 +23,11 @@ export default function Friends() {
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
-            {console.log(user)}
             <Pressable onPress={() => console.log(user.id)}>
                 <View style={styles.imageRow} >
                     <Image
                         style={{width: 96, height: 96}}
-                        //helper function to check if avatar_urls exists and add https to avatar_urls
-                        source={{uri: user.avatar_urls?.['96']}}
+                        source={{uri: user.avatar_urls?.['96'].startsWith('https:') ? user.avatar_urls?.['96'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
                     />
                     <Text>{user.name}</Text>
                 </View>

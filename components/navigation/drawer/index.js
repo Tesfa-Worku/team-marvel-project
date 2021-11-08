@@ -9,7 +9,7 @@ import {
     Image,
     TextInput,
     Platform,
-    StatusBar,
+    StatusBar
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -21,6 +21,7 @@ import Newsfeed from '../../Newsfeed';
 import Login from '../../Login';
 import SignUp from '../../SignUp';
 import ResetPassword from '../../ResetPassword';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
@@ -351,7 +352,9 @@ function Drawer() {
         >
             <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
             <DrawerNavigation.Screen name="Friends" component={Friends} />
-            <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
+            {/* <ScrollView> */}
+                <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
+            {/* </ScrollView> */}
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
             <DrawerNavigation.Screen name="Login" component={Login} /> 

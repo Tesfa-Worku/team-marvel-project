@@ -69,7 +69,8 @@ const MessageWindow = () => {
         <View>
             <Image
                 style={styles.image}
-                source={{uri: selectedUser.avatar_urls?.['24']}}
+                source={{uri: selectedUser.avatar_urls?.['24'].startsWith('https:') ? selectedUser.avatar_urls?.['24'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
+                
             />
             <Text>{selectedUser.name}</Text>
             <ScrollView>
