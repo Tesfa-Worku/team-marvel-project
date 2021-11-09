@@ -67,7 +67,7 @@ const generateGallery = imageArr.map((img, index) => {
 )
 
 return (
-    <View>
+    <ScrollView>
         <View style={styles.container}>
             <Text>Images</Text>
             <View style={styles.buttonContainer}>
@@ -87,7 +87,7 @@ return (
         <View style={styles.imageContainer}>   
             {generateGallery}
         </View>
-    </View>
+    </ScrollView>
     )
 }
 

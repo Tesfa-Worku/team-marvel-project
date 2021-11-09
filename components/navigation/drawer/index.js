@@ -9,7 +9,8 @@ import {
     Image,
     TextInput,
     Platform,
-    StatusBar
+    StatusBar,
+    ScrollView
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -22,7 +23,6 @@ import Newsfeed from '../../Newsfeed';
 import Login from '../../Login';
 import SignUp from '../../SignUp';
 import ResetPassword from '../../ResetPassword';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
