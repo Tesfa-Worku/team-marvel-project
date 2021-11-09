@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet,Text, View, Image, Button, Platform } from 'react-native';
+import { NavigationContext } from 'react-navigation';
 import { WP_GET } from './WPAPI';
 
 
-export default function ProfilePage () {
+export default function ProfilePage ({ navigation }) {
   const [userList, setUserList] = useState([]);
   useEffect(
       () => {
@@ -74,8 +75,9 @@ export default function ProfilePage () {
             <Button 
               title="Edit Profile"
               color='#F0131E'
-              
+              onPress={() => navigation.navigate('ProfileEdit')}
             />
+
           
         </View>
 
