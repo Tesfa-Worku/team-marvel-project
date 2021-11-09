@@ -95,14 +95,14 @@ const MessageWindow = () => {
 }
 
 return (
-    <View>
+    <ScrollView>
         <View style={styles.sidebar}>
             {userList}
         </View>
         <View style={styles.container}>
             {MessageWindow()}
         </View>
-    </View>
+    </ScrollView>
     )
 }
 
