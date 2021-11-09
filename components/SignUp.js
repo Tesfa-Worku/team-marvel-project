@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 import { checkPasswordStrength } from './Password';
+import { NavigationContext } from 'react-navigation';
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
     const [userData, setUserData] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -46,7 +47,11 @@ const validateForm = (passwordInput) => {
 const handleOnSubmit = () => {
     // WP_POST API function here
 
-    validateForm(password);
+    //validateForm(password);
+
+    // set loggedIn = true
+
+    navigation.navigate('Newsfeed');
 }
 
 return (
@@ -91,15 +96,16 @@ return (
             <Button
                 color='#F0131E'
                 title='Sign Up'
-                // onPress={() => handleOnSubmit()}
+                onPress={() => handleOnSubmit()}
             />
-            {/* <TouchableOpacity>
-                    <Link to='/login'>
-                        <Text>
-                            Already have an account?
-                        </Text>
-                    </Link>
-                </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <Text>
+                    Already have an account?
+                </Text>
+                <Text style={styles.loginHere}>
+                    Login here
+                </Text>
+            </TouchableOpacity>
         </ScrollView>
     </View>
     )
@@ -118,4 +124,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
       },
+    loginHere: {
+        color: '#F0131E',
+        alignSelf: 'center',
+    },
 });

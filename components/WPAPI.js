@@ -19,6 +19,9 @@ const endpoint = {
     members: '/buddypress/v1/members',
     messages: '/buddypress/v1/messages',
     signup: '/buddypress/v1/signup',
+
+    // JWT authentication
+    token: '/jwt-auth/v1/token',
 };
 
 export const WP_GET = (type, queryStringVars = '') => {
@@ -33,6 +36,8 @@ export const WP_GET = (type, queryStringVars = '') => {
         .catch(error=> console.log(error))
 }
 
+
+
 export const WP_POST = (type, queryStringVars = '', bodyObj) => {
     if (!endpoint[type] && typeof type !== 'string') {
         console.warn('WP_GET(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
@@ -42,6 +47,9 @@ export const WP_POST = (type, queryStringVars = '', bodyObj) => {
     }
     const options = {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(bodyObj)
     };
     return fetch(`${BASE_URL}${endpoint[type]}`, options)

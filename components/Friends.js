@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Image,
-    Pressable
+    Pressable,
+    ScrollView
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
@@ -38,14 +39,14 @@ const generateFriends = friendsArr.map((user, index) => {
 )
 
 return (
-    <View>
+    <ScrollView>
         <View style={styles.container}>
             <Text>Friends</Text>
         </View>
         <View style={styles.imageContainer}>   
             {generateFriends}
         </View>
-    </View>
+    </ScrollView>
     )
 }
 
