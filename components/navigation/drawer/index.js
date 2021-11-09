@@ -10,6 +10,7 @@ import {
     TextInput,
     Platform,
     StatusBar,
+    ScrollView
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -196,6 +197,30 @@ const webHeader = (props) => {
                             ]}
                         >
                             Profile
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('LoginPage')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('LoginPage') && styles.black,
+                            ]}
+                        >
+                            Login
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate('SignupPage')}
+                    >
+                        <Text
+                            style={[
+                                styles.white,
+                                isActive('SignupPage') && styles.black,
+                            ]}
+                        >
+                            SignUp
                         </Text>
                     </TouchableOpacity>
                 </View>
