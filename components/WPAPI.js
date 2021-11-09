@@ -36,8 +36,6 @@ export const WP_GET = (type, queryStringVars = '') => {
         .catch(error=> console.log(error))
 }
 
-
-
 export const WP_POST = (type, queryStringVars = '', bodyObj) => {
     if (!endpoint[type] && typeof type !== 'string') {
         console.warn('WP_GET(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
