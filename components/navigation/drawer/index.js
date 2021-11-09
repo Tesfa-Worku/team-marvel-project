@@ -9,7 +9,7 @@ import {
     Image,
     TextInput,
     Platform,
-    StatusBar,
+    StatusBar
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -17,10 +17,12 @@ import Friends from '../../Friends';
 import ImageGallery from '../../ImageGallery';
 import Messages from '../../Messages';
 import ProfilePage from '../../ProfilePage';
+import ProfileEdit from '../../ProfileEdit';
 import Newsfeed from '../../Newsfeed';
 import Login from '../../Login';
 import SignUp from '../../SignUp';
 import ResetPassword from '../../ResetPassword';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === 'web';
@@ -122,9 +124,7 @@ const webHeader = (props) => {
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {showInput ? (
-                            <></>
-                        ) : (
+                        {!showInput && ( 
                             <TouchableOpacity
                                 onPress={() => setShowInput(true)}
                                 style={{ flex: 0 }}
@@ -258,12 +258,24 @@ const drawerContent = (props) => {
                 </View>
                 <TouchableOpacity
                     style={[styles.btn, styles.btnDanger]}
-                    onPress={() => {
-                        setLoggedIn && setLoggedIn(!loggedIn);
-                    }}
+                    onPress={() =>
+                        props.navigation.navigate('Login')
+                    }
                 >
                     <Text style={styles.textDanger}>
                         {loggedIn ? 'Logout' : 'Login'}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={[styles.btn, styles.btnDanger]}
+                    onPress={() => {
+                        props.navigation.navigate('SignUp');
+                    }}
+                >
+                    <Text 
+                        style={styles.textDanger}
+                    >
+                        SignUp
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -288,15 +300,13 @@ const header = (props) => {
                 </View>
             ) : (
                 <>
-                    <View>
-                        {!isWeb && (
+                    {!isWeb && (
+                        <View>
                             <TouchableOpacity onPress = {() => props.navigation.navigate('Newsfeed')}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                                MARVEL SPACE
-                            </Text>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                    MARVEL SPACE
+                                </Text>
                             </TouchableOpacity>
-                        )}
-                        {Platform.OS !== 'web' && (
                             <TouchableOpacity
                                 onPress={props.navigation.toggleDrawer}
                             >
@@ -306,22 +316,20 @@ const header = (props) => {
                                     color="black"
                                 />
                             </TouchableOpacity>
-                        )}
-                    </View>
+                        </View>
+                    )}
                     <View style={{ alignItems: 'center' }}>
-                        {Platform.OS === 'web' ? (
-                            <></>
-                        ) : (
+                        {!isWeb && (
                             <Image
                                 source={require('../../Images/Logo.png')}
-                                width={64}
+                                width={82}
                                 height={32}
-                                style={{ width: 64, height: 32 }}
+                                style={{ width: 82, height: 32 }}
                             />
                         )}
                     </View>
                     {isWeb && webHeader(props)}
-                    {Platform.OS !== 'web' && (
+                    {!isWeb && (
                         <TouchableOpacity onPress={() => setShowInput(true)}>
                             <AntDesign name="search1" size={24} color="black" />
                         </TouchableOpacity>
@@ -354,6 +362,7 @@ function Drawer() {
             <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
             <DrawerNavigation.Screen name="Messages" component={Messages} />
             <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
+            <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
             <DrawerNavigation.Screen name="Login" component={Login} /> 
             <DrawerNavigation.Screen name="SignUp" component={SignUp} />
             <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
