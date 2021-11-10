@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { render } from 'react-dom';
 import { StyleSheet,Text, View, Image, Button, Platform } from 'react-native';
-import { NavigationContext } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 import { WP_GET } from './WPAPI';
 
 
@@ -16,6 +15,7 @@ export default function ProfilePage ({ navigation }) {
       },
       []
   )
+  const nav = useNavigation();
 
   const buildProfile = userList.map((user, index) => {
     const imgWidth = 96;
@@ -75,7 +75,7 @@ export default function ProfilePage ({ navigation }) {
             <Button 
               title="Edit Profile"
               color='#F0131E'
-              onPress={() => navigation.navigate('ProfileEdit')}
+              onPress={() => nav.navigate('ProfileEdit')}
             />
 
           
