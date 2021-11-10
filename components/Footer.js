@@ -1,9 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function Footer() {
     const pageArray = ['About', 'Rules', 'Contact', 'Terms']
+
+    const nav = useNavigation();
 
     const pageList = pageArray.map((pageArray) => (
         <View>          
@@ -18,16 +20,16 @@ export default function Footer() {
             <Text>brought to you by team-marvel</Text>
         </View> 
         <View style={styles.linksWrapper}>
-            <Pressable onPress={pageList[0]}>
+            <Pressable onPress={() => nav.navigate("About")}>
                 <Text>About</Text>
             </Pressable>            
-            <Pressable onPress={pageList[1]}>
+            <Pressable onPress={() => nav.navigate("Rules")}>
                 <Text>Rules</Text>
             </Pressable>
-            <Pressable onPress={pageList[2]}>
+            <Pressable onPress={() => nav.navigate("Contact")}>
                 <Text>Contact</Text>
             </Pressable>
-            <Pressable onPress={pageList[3]}>
+            <Pressable onPress={() => nav.navigate("Terms")}>
                 <Text>Terms</Text>
             </Pressable>        
         </View>

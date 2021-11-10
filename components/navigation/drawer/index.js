@@ -23,6 +23,10 @@ import Newsfeed from "../../Newsfeed";
 import Login from "../../Login";
 import SignUp from "../../SignUp";
 import ResetPassword from "../../ResetPassword";
+import Rules from "../../Rules";
+import Contact from "../../Contact";
+import Terms from "../../Terms";
+import About from "../../About";
 import { AuthContext } from "../../../store/contexts/authContext";
 
 const DrawerNavigation = createDrawerNavigator();
@@ -358,6 +362,10 @@ function Drawer() {
       </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="SignUp" component={SignUp} />
       <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
+      <DrawerNavigation.Screen name="About" component={About} />
+      <DrawerNavigation.Screen name="Rules" component={Rules} />
+      <DrawerNavigation.Screen name="Contact" component={Contact} />
+      <DrawerNavigation.Screen name="Terms" component={Terms} />
     </DrawerNavigation.Navigator>
   );
 }
