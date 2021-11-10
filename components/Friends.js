@@ -13,13 +13,16 @@ export default function Friends({ navigation }) {
     const [friendsArr, setFriendsArr] = useState([]);
     useEffect(
         () => {
-            WP_GET('users')
+            WP_GET('members')
             .then(
                 (data) => setFriendsArr(data)
             )
         },
         []
     )
+
+//full 150x150
+//thumb 50x50
 
 const generateFriends = friendsArr.map((user, index) => {
     return(
@@ -28,7 +31,7 @@ const generateFriends = friendsArr.map((user, index) => {
                 <View style={styles.imageRow} >
                     <Image
                         style={{width: 96, height: 96}}
-                        source={{uri: user.avatar_urls?.['96'].startsWith('https:') ? user.avatar_urls?.['96'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
+                        source={{uri: user.avatar_urls?.full.startsWith('https:') ? user.avatar_urls?.full : 'https://www.gravatar.com/avatar/?d=identicon'}}
                     />
                     <Text>{user.name}</Text>
                 </View>
