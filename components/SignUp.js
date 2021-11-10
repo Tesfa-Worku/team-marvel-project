@@ -6,13 +6,13 @@ import {
     Button,
     TextInput,
     ScrollView,
-    TouchableOpacity
+    Pressable
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 import { checkPasswordStrength } from './Password';
 import { NavigationContext } from 'react-navigation';
 
-export default function SignUp({ navigation }) {
+export default function SignUp({ navigation, loggedIn}) {
     const [userData, setUserData] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -51,7 +51,7 @@ const handleOnSubmit = () => {
 
     // set loggedIn = true
 
-    navigation.navigate('Newsfeed');
+    navigation.navigate('Newsfeed', {loggedIn: loggedIn});
 }
 
 return (
@@ -98,14 +98,14 @@ return (
                 title='Sign Up'
                 onPress={() => handleOnSubmit()}
             />
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Pressable onPress={() => navigation.navigate('Login')}>
                 <Text>
                     Already have an account?
                 </Text>
                 <Text style={styles.loginHere}>
                     Login here
                 </Text>
-            </TouchableOpacity>
+            </Pressable>
         </ScrollView>
     </View>
     )

@@ -5,7 +5,7 @@ import {
     View,
     Button,
     Image,
-    ScrollView
+    ScrollView,
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
@@ -53,7 +53,7 @@ const generateGallery = imageArr.map((img, index) => {
                     source={{uri: img.source_url}}
                 />
             </View>
-            <View>
+            <View style={styles.deleteButton}>
                 <Button
                     color='#F0131E'
                     key={index}
@@ -67,8 +67,8 @@ const generateGallery = imageArr.map((img, index) => {
 )
 
 return (
-    <ScrollView>
-        <View style={styles.container}>
+    <ScrollView style={styles.background}>
+        <View style={styles.topContainer}>
             <Text>Images</Text>
             <View style={styles.buttonContainer}>
                 <Button
@@ -92,9 +92,11 @@ return (
 }
 
 const styles = StyleSheet.create({
-    container: {
+    background: {
+        backgroundColor: '#fff',
+    },
+    topContainer: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -105,15 +107,22 @@ const styles = StyleSheet.create({
     imageContainer: {
         backgroundColor: '#fff',
         display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
+        // flexWrap: 'wrap',
+        // flexDirection: 'row',
+        margin: 10,
     },
     imageRow: {
         height: 'auto',
         flexGrow: 1,
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
+    },
+    deleteButton: {
+        width: '20%',
+        alignSelf: 'center',
+        margin: 5,
     },
     spacing: {
         width: 5,
