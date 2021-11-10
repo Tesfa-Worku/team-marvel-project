@@ -4,12 +4,12 @@ import {
     Text,
     View,
     Image,
-    Pressable,
-    ScrollView
+    ScrollView,
+    Pressable
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
-export default function Friends() {
+export default function Friends({ navigation }) {
     const [friendsArr, setFriendsArr] = useState([]);
     useEffect(
         () => {
@@ -24,7 +24,7 @@ export default function Friends() {
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
-            <Pressable onPress={() => console.log(user.id)}>
+            <Pressable onPress={() => navigation.navigate('ProfilePage', {userId: user.id})}>
                 <View style={styles.imageRow} >
                     <Image
                         style={{width: 96, height: 96}}
@@ -43,7 +43,7 @@ return (
         <View style={styles.container}>
             <Text>Friends</Text>
         </View>
-        <View style={styles.imageContainer}>   
+        <View style={styles.imageContainer}>
             {generateFriends}
         </View>
     </ScrollView>
