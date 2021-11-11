@@ -21,16 +21,13 @@ export default function Friends({ navigation }) {
         []
     )
 
-//full 150x150
-//thumb 50x50
-
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
             <Pressable onPress={() => navigation.navigate('ProfilePage', {userId: user.id})}>
                 <View style={styles.imageRow} >
                     <Image
-                        style={{width: 96, height: 96}}
+                        style={{width: 150, height: 150}}
                         source={{uri: user.avatar_urls?.full.startsWith('https:') ? user.avatar_urls?.full : 'https://www.gravatar.com/avatar/?d=identicon'}}
                     />
                     <Text>{user.name}</Text>
@@ -42,7 +39,7 @@ const generateFriends = friendsArr.map((user, index) => {
 )
 
 return (
-    <ScrollView>
+    <ScrollView style={styles.background}>
         <View style={styles.container}>
             <Text>Friends</Text>
         </View>
@@ -54,6 +51,9 @@ return (
 }
 
 const styles = StyleSheet.create({
+    background: {
+        backgroundColor: '#fff',
+    },
     container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
     imageContainer: {
         backgroundColor: '#fff',
         display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
         justifyContent: 'center',
+        margin: 10,
     },
     imageRow: {
         height: 'auto',
         flexGrow: 1,
+        alignItems: 'center',
     },
 });
