@@ -20,7 +20,7 @@ export default function Messages() {
     const [selectedUser, setSelectedUser] = useState({});
     useEffect(
         () => {
-            WP_GET('users')
+            WP_GET('members')
             .then(
                 (data) => {
                     setUserData(data);
@@ -69,7 +69,7 @@ const MessageWindow = () => {
         <View>
             <Image
                 style={styles.image}
-                source={{uri: selectedUser.avatar_urls?.['24'].startsWith('https:') ? selectedUser.avatar_urls?.['24'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
+                source={{uri: selectedUser.avatar_urls?.thumb.startsWith('https:') ? selectedUser.avatar_urls?.thumb : 'https://www.gravatar.com/avatar/?d=identicon'}}
                 
             />
             <Text>{selectedUser.name}</Text>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         // float: 'left',
     },
     image: {
-        height: 24,
-        width: 24,
+        height: 50,
+        width: 50,
     },
 });
