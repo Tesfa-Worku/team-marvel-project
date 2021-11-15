@@ -44,7 +44,9 @@ return (
             <Text>Friends</Text>
         </View>
         <View style={styles.imageContainer}>
-            {generateFriends}
+            {friendsArr.length > 0 ? 
+            generateFriends : 
+            <Text>No friends. :(</Text>}
         </View>
     </ScrollView>
     )
