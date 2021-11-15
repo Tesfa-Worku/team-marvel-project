@@ -36,17 +36,18 @@ export const WP_GET = (type, queryStringVars = '') => {
         .catch(error=> console.log(error))
 }
 
-export const WP_POST = (type, queryStringVars = '', bodyObj) => {
+export const WP_POST = (type, queryStringVars = '', bodyObj, token) => {
     if (!endpoint[type] && typeof type !== 'string') {
-        console.warn('WP_GET(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
+        console.warn('WP_POST(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
     }
     if (typeof queryStringVars !== 'string') {
-        console.warn(`WP_GET(type, queryStringVars): queryStringVars value must be a string that starts with '/' or '?'. This string will be appended to the end of the URL.`);
+        console.warn(`WP_POST(type, queryStringVars): queryStringVars value must be a string that starts with '/' or '?'. This string will be appended to the end of the URL.`);
     }
     const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(bodyObj)
     };
