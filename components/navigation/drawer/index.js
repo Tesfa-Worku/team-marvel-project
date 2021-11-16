@@ -64,9 +64,9 @@ const webHeader = (props) => {
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Newsfeed")}
           >
-            <Text style={[{ fontSize: 20, marginLeft: 10 }, styles.white]}>
+            {/* <Text style={[{ fontSize: 20, marginLeft: 10 }, styles.white]}>
               Marvel&nbsp;Space
-            </Text>
+            </Text> */}
           </TouchableOpacity>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {/* <TextInput
@@ -181,7 +181,7 @@ const webHeader = (props) => {
               Profile
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("LoginPage")}
           >
             <Text style={[styles.white, isActive("LoginPage") && styles.black]}>
@@ -196,7 +196,7 @@ const webHeader = (props) => {
             >
               SignUp
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </SafeAreaView>
@@ -302,9 +302,9 @@ const header = (props) => {
               <TouchableOpacity
                 onPress={() => props.navigation.navigate("Newsfeed")}
               >
-                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                {/* <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                   MARVEL SPACE
-                </Text>
+                </Text> */}
               </TouchableOpacity>
               <TouchableOpacity onPress={props.navigation.toggleDrawer}>
                 <AntDesign name="menuunfold" size={24} color="black" />
