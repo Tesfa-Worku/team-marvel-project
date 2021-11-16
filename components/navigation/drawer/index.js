@@ -333,7 +333,7 @@ const header = (props) => {
   );
 };
 
-function Drawer() {
+function Drawer({ setStoredToken }) {
   const context = useContext(AuthContext);
 
   return (
@@ -358,7 +358,12 @@ function Drawer() {
       <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
       <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
       <DrawerNavigation.Screen name="Login">
-        {() => <Login setLoggedIn={context.setLoggedIn} />}
+        {() => (
+          <Login
+            setLoggedIn={context.setLoggedIn}
+            setStoredToken={setStoredToken}
+          />
+        )}
       </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="SignUp" component={SignUp} />
       <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
