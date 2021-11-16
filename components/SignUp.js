@@ -9,9 +9,8 @@ import {
     Pressable
 } from 'react-native';
 import { WP_POST } from './WPAPI';
-import { checkPasswordStrength } from './Password';
 
-export default function SignUp({ navigation, storedToken}) {
+export default function SignUp({ navigation }) {
     const [userData, setUserData] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -22,9 +21,10 @@ export default function SignUp({ navigation, storedToken}) {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const [strongPassword, setStrongPassword] = useState(false);
+
     useEffect(
         () => {
-            // Send New User to Sign Up
             if(loading){
                 WP_POST(
                     'users',
@@ -37,7 +37,7 @@ export default function SignUp({ navigation, storedToken}) {
                         'password': `${password}`,
                         'name': `${userName}`,
                     },
-                    `${storedToken}`
+                    ''
                 )
                 .then(data => {
                     data.data?.status !== 400
@@ -55,14 +55,13 @@ const errorForm = (data) => {
     data?.message ? setError(data.message.replace(regex, '')) : '';
 }
 
-const validateForm = (passwordInput) => {
+const validateForm = () => {
     if (!firstName || typeof firstName !== 'string') alert('Please enter first name.');
     if (!lastName || typeof lastName !== 'string') alert('Please enter last name.');
     if (!email || typeof email !== 'string') alert('Please enter email.');
     if (!userName || typeof userName !== 'string') alert('Please enter username.');
     if ((!password || !confirmPassword) || typeof password !== 'string') alert('Please enter password');
-
-    checkPasswordStrength(passwordInput);
+    if (!strongPassword) alert('Password must be 8 to 15 characters containing at least a digit, uppercase, lowercase, and symbol')
 
     return (
         firstName.length > 0 &&
@@ -73,10 +72,27 @@ const validateForm = (passwordInput) => {
     );
 }
 
+const checkPasswordStrength = (passwordInput) => {
+    // src: https://www.w3resource.com/javascript/form/password-validation.php
+    const check = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+    if (passwordInput.match(check)) {
+        setStrongPassword(true);
+        return true;
+    }
+    else {
+        setStrongPassword(false);
+        return false;
+    }
+}
+
 const handleOnSubmit = () => {
+    checkPasswordStrength(password);
+    validateForm();
     setLoading(true);
-    validateForm(password);
-    navigation.navigate('Newsfeed');
+    if (!loading) {
+        navigation.navigate('Login');
+    }
 }
 
 return (
