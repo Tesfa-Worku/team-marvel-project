@@ -326,7 +326,7 @@ const header = (props) => {
   );
 };
 
-function Drawer({ setStoredToken }) {
+function Drawer({ setStoredToken, storedToken }) {
   const context = useContext(AuthContext);
 
   return (
@@ -345,7 +345,13 @@ function Drawer({ setStoredToken }) {
       }}
     >
       <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
-      <DrawerNavigation.Screen name="Friends" component={Friends} />
+      <DrawerNavigation.Screen name="Friends">
+        {() => (
+          <Friends
+            storedToken={storedToken}
+          />
+        )}
+      </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
       <DrawerNavigation.Screen name="Messages" component={Messages} />
       <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
@@ -359,7 +365,13 @@ function Drawer({ setStoredToken }) {
           />
         )}
       </DrawerNavigation.Screen>
-      <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+      <DrawerNavigation.Screen name="SignUp">
+        {() => (
+          <SignUp
+            setStoredToken={setStoredToken}
+          />
+        )}
+      </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
       <DrawerNavigation.Screen name="About" component={About} />
       <DrawerNavigation.Screen name="Rules" component={Rules} />

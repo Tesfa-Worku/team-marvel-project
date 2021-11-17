@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import { WP_GET } from './WPAPI';
 
-export default function Friends({ navigation }) {
+export default function Friends({ navigation, storedToken }) {
     const [friendsArr, setFriendsArr] = useState([]);
     useEffect(
         () => {
-            WP_GET('members')
+            WP_GET('friends', '/1', storedToken)
             .then(
-                (data) => setFriendsArr(data)
+                (data) => {setFriendsArr(data);
+                console.log(data);}
             )
         },
         []
@@ -44,7 +45,7 @@ return (
             <Text>Friends</Text>
         </View>
         <View style={styles.imageContainer}>
-            {friendsArr.length > 0 ? 
+            {friendsArr ? 
             generateFriends : 
             <Text>No friends. :(</Text>}
         </View>

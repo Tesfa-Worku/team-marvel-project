@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -8,11 +8,9 @@ import {
     ScrollView,
     Pressable
 } from 'react-native';
-import { WP_GET } from './WPAPI';
-import { checkPasswordStrength } from './Password';
-import { NavigationContext } from 'react-navigation';
+import { WP_POST } from './WPAPI';
 
-export default function SignUp({ navigation, loggedIn}) {
+export default function SignUp({ navigation, storedToken }) {
     const [userData, setUserData] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -20,20 +18,50 @@ export default function SignUp({ navigation, loggedIn}) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorText, setErrorText] = useState('');
-    const [canSignUp, setCanSignUp] = useState(false);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const emailRef = createRef();
-    const passwordRef = createRef();
+    const [strongPassword, setStrongPassword] = useState(false);
 
-const validateForm = (passwordInput) => {
+    useEffect(
+        () => {
+            if(loading){
+                WP_POST(
+                    'users',
+                    '',
+                    {
+                        'first_name': `${firstName}`,
+                        'last_name': `${lastName}`,
+                        'email': `${email}`,
+                        'userName': `${userName}`,
+                        'password': `${password}`,
+                        'name': `${userName}`,
+                    },
+                    `${storedToken}`
+                )
+                .then(data => {
+                    data.data?.status !== 400
+                        ? errorForm(data)
+                        : console.log('New post response ', data);
+                    setLoading(false);
+                })
+            }
+        },
+        [loading]
+    );
+
+const errorForm = (data) => {
+    const regex = /<[^>]*>/g;
+    data?.message ? setError(data.message.replace(regex, '')) : '';
+}
+
+const validateForm = () => {
     if (!firstName || typeof firstName !== 'string') alert('Please enter first name.');
     if (!lastName || typeof lastName !== 'string') alert('Please enter last name.');
     if (!email || typeof email !== 'string') alert('Please enter email.');
     if (!userName || typeof userName !== 'string') alert('Please enter username.');
     if ((!password || !confirmPassword) || typeof password !== 'string') alert('Please enter password');
-
-    checkPasswordStrength(passwordInput);
+    if (!strongPassword) alert('Password must be 8 to 15 characters containing at least a digit, uppercase, lowercase, and symbol')
 
     return (
         firstName.length > 0 &&
@@ -44,14 +72,27 @@ const validateForm = (passwordInput) => {
     );
 }
 
+const checkPasswordStrength = (passwordInput) => {
+    // src: https://www.w3resource.com/javascript/form/password-validation.php
+    const check = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+    if (passwordInput.match(check)) {
+        setStrongPassword(true);
+        return true;
+    }
+    else {
+        setStrongPassword(false);
+        return false;
+    }
+}
+
 const handleOnSubmit = () => {
-    // WP_POST API function here
-
-    //validateForm(password);
-
-    // set loggedIn = true
-
-    navigation.navigate('Newsfeed', {loggedIn: loggedIn});
+    checkPasswordStrength(password);
+    validateForm();
+    setLoading(true);
+    if (!loading) {
+        navigation.navigate('Login');
+    }
 }
 
 return (
@@ -86,12 +127,14 @@ return (
                 onChangeText={text => setPassword(text)}
                 value={password}
                 placeholder='Password'
+                secureTextEntry={true}
             />
             <TextInput
                 style={styles.input}
                 onChangeText={text => setConfirmPassword(text)}
                 value={confirmPassword}
                 placeholder='Confirm password'
+                secureTextEntry={true}
             />
             <Button
                 color='#F0131E'
