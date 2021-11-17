@@ -17,8 +17,7 @@ export default function Friends() {
         () => {
             WP_GET('members')
             .then(
-                (data) => {setFriendsArr(data);
-                console.log(data);}
+                (data) => setFriendsArr(data)
             )
         },
         []
