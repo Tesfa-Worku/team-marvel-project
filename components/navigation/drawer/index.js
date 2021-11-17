@@ -69,15 +69,6 @@ const webHeader = (props) => {
             </Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* <TextInput
-                            placeholder="Search"
-                            style={styles.webInput}
-                        />
-                        <TouchableOpacity
-                            style={{ padding: 8, backgroundColor: '#fff' }}
-                        >
-                            <Text>Search</Text>
-                        </TouchableOpacity> */}
             <Image
               source={require("../../Images/Logo.png")}
               width={64}
@@ -365,7 +356,13 @@ function Drawer({ setStoredToken }) {
           />
         )}
       </DrawerNavigation.Screen>
-      <DrawerNavigation.Screen name="SignUp" component={SignUp} />
+      <DrawerNavigation.Screen name="SignUp">
+        {() => (
+          <SignUp
+            setStoredToken={setStoredToken}
+          />
+        )}
+      </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
       <DrawerNavigation.Screen name="About" component={About} />
       <DrawerNavigation.Screen name="Rules" component={Rules} />

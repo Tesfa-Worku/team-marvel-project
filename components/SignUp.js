@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { WP_POST } from './WPAPI';
 
-export default function SignUp({ navigation }) {
+export default function SignUp({ navigation, storedToken }) {
     const [userData, setUserData] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -37,7 +37,7 @@ export default function SignUp({ navigation }) {
                         'password': `${password}`,
                         'name': `${userName}`,
                     },
-                    ''
+                    `${storedToken}`
                 )
                 .then(data => {
                     data.data?.status !== 400

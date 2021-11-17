@@ -46,11 +46,12 @@ export const WP_POST = (type, queryStringVars = '', bodyObj, token) => {
     const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(bodyObj)
     };
+    const bearer = { 'Authorization': `Bearer ${token}` };
+    options.headers = token ? {...bearer, ...options.headers} : options.headers;
     return fetch(`${BASE_URL}${endpoint[type]}`, options)
         .then(response => response.json())
         .catch(error=> console.log(error))
