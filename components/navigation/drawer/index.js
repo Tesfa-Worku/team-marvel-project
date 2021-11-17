@@ -28,6 +28,8 @@ import Contact from "../../Contact";
 import Terms from "../../Terms";
 import About from "../../About";
 import { AuthContext } from "../../../store/contexts/authContext";
+import SearchPage from "../../SearchPage";
+import Users from "../../Users";
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === "web";
@@ -69,15 +71,6 @@ const webHeader = (props) => {
             </Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* <TextInput
-                            placeholder="Search"
-                            style={styles.webInput}
-                        />
-                        <TouchableOpacity
-                            style={{ padding: 8, backgroundColor: '#fff' }}
-                        >
-                            <Text>Search</Text>
-                        </TouchableOpacity> */}
             <Image
               source={require("../../Images/Logo.png")}
               width={64}
@@ -324,7 +317,7 @@ const header = (props) => {
           {isWeb && webHeader(props)}
           {!isWeb && (
             <TouchableOpacity onPress={() => setShowInput(true)}>
-              <AntDesign name="search1" size={24} color="black" />
+              <AntDesign name="search1" size={24} color="black" onPress={() =>props.navigation.navigate('SearchPage')}/>
             </TouchableOpacity>
           )}
         </>
@@ -357,6 +350,7 @@ function Drawer({ setStoredToken }) {
       <DrawerNavigation.Screen name="Messages" component={Messages} />
       <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
       <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
+      <DrawerNavigation.Screen name="Users" component={Users} />
       <DrawerNavigation.Screen name="Login">
         {() => (
           <Login
