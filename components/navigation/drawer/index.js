@@ -10,7 +10,7 @@ import {
   TextInput,
   Platform,
   StatusBar,
-  ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -28,12 +28,13 @@ import Contact from "../../Contact";
 import Terms from "../../Terms";
 import About from "../../About";
 import { AuthContext } from "../../../store/contexts/authContext";
+import Users from "../../Users";
 
 const DrawerNavigation = createDrawerNavigator();
 const isWeb = Platform.OS === "web";
 
 const webHeader = (props) => {
-  const { showInput, setShowInput } = props;
+  const { showInput, setShowInput, setSearchQuery } = props;
   const isActive = (nameOrIndex) => {
     return props.route.name === nameOrIndex;
   };
@@ -55,16 +56,23 @@ const webHeader = (props) => {
       >
         <View
           style={{
-            flex: 1,
             flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 8,
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "center",
+            borderWidth: 1,
           }}
         >
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Newsfeed")}
           >
-            {/* <Text style={[{ fontSize: 20, marginLeft: 10 }, styles.white]}>
+            {/* <Text style={[{ fon <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 8,
+          }}tSize: 20, marginLeft: 10 }, styles.white]}>
               Marvel&nbsp;Space
             </Text> */}
           </TouchableOpacity>
@@ -114,9 +122,12 @@ const webHeader = (props) => {
                 </TouchableOpacity>
               </View>
             )}
-            {!showInput && (
+            {loggedIn && !showInput && (
               <TouchableOpacity
-                onPress={() => setShowInput(true)}
+                onPress={() => {
+                  setSearchQuery("");
+                  setShowInput(true);
+                }}
                 style={{ flex: 0 }}
               >
                 <AntDesign
@@ -272,12 +283,48 @@ const DrawerContent = (props) => {
 };
 
 const header = (props) => {
-  const { showInput, setShowInput } = props;
+  const {
+    showInput,
+    setShowInput,
+    loggedIn,
+    searchQuery,
+    setSearchQuery,
+    searching,
+  } = props;
+
+  const onSearch = () => {
+    if (searchQuery) {
+      props.navigation.navigate("Users");
+    }
+  };
   return (
     <View {...props} style={styles.header}>
       {showInput ? (
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input} placeholder="Search" />
+          <View
+            style={[
+              styles.inputContainer,
+              { backgroundColor: "#fff", paddingRight: 8 },
+            ]}
+          >
+            <TextInput
+              style={styles.input}
+              placeholder="Search"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              onSubmitEditing={onSearch}
+            />
+            {searching ? (
+              <ActivityIndicator size="small" color={"#aa0000"} />
+            ) : (
+              <AntDesign
+                name="search1"
+                size={24}
+                color="black"
+                onPress={onSearch}
+              />
+            )}
+          </View>
           <AntDesign
             name="closecircleo"
             size={24}
@@ -314,8 +361,14 @@ const header = (props) => {
           </View>
           {isWeb && webHeader(props)}
           {!isWeb && (
-            <TouchableOpacity onPress={() => setShowInput(true)}>
-              <AntDesign name="search1" size={24} color="black" />
+            <TouchableOpacity
+              style={{ flex: 1, alignItems: "flex-end" }}
+              onPress={() => {
+                setSearchQuery("");
+                setShowInput(true);
+              }}
+            >
+              {loggedIn && <AntDesign name="search1" size={24} color="black" />}
             </TouchableOpacity>
           )}
         </>
@@ -342,18 +395,22 @@ function Drawer({ setStoredToken, storedToken }) {
           }),
       }}
     >
-      <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
-      <DrawerNavigation.Screen name="Friends">
-        {() => (
-          <Friends
-            storedToken={storedToken}
+      {context.loggedIn && (
+        <>
+          <DrawerNavigation.Screen name="Newsfeed" component={Newsfeed} />
+          <DrawerNavigation.Screen name="Friends">
+            {() => <Friends storedToken={storedToken} />}
+          </DrawerNavigation.Screen>
+          <DrawerNavigation.Screen
+            name="ImageGallery"
+            component={ImageGallery}
           />
-        )}
-      </DrawerNavigation.Screen>
-      <DrawerNavigation.Screen name="ImageGallery" component={ImageGallery} />
-      <DrawerNavigation.Screen name="Messages" component={Messages} />
-      <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
-      <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
+          <DrawerNavigation.Screen name="Messages" component={Messages} />
+          <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
+          <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
+          <DrawerNavigation.Screen name="Users" component={Users} />
+        </>
+      )}
       <DrawerNavigation.Screen name="Login">
         {() => (
           <Login
@@ -363,11 +420,7 @@ function Drawer({ setStoredToken, storedToken }) {
         )}
       </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="SignUp">
-        {() => (
-          <SignUp
-            setStoredToken={setStoredToken}
-          />
-        )}
+        {() => <SignUp setStoredToken={setStoredToken} />}
       </DrawerNavigation.Screen>
       <DrawerNavigation.Screen name="ResetPassword" component={ResetPassword} />
       <DrawerNavigation.Screen name="About" component={About} />
