@@ -8,12 +8,14 @@ import {
     Pressable
 } from 'react-native';
 import { WP_GET } from './WPAPI';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Friends({ navigation, storedToken }) {
+export default function Friends() {
+    const nav = useNavigation();
     const [friendsArr, setFriendsArr] = useState([]);
     useEffect(
         () => {
-            WP_GET('friends', '/1', storedToken)
+            WP_GET('members')
             .then(
                 (data) => {setFriendsArr(data);
                 console.log(data);}
@@ -25,7 +27,7 @@ export default function Friends({ navigation, storedToken }) {
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
-            <Pressable onPress={() => navigation.navigate('ProfilePage', {userId: user.id})}>
+            <Pressable onPress={() => nav.navigate('ProfilePage', {userId: user.id})}>
                 <View style={styles.imageRow} >
                     <Image
                         style={{width: 150, height: 150}}
