@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet,Text, View, Image, Button, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { WP_GET } from './WPAPI';
+import MediaQuery from 'react-responsive';
 
 
 export default function ProfilePage ({ navigation }) {
@@ -16,6 +17,8 @@ export default function ProfilePage ({ navigation }) {
       []
   )
   const nav = useNavigation();
+
+
 
   const buildProfile = userList.map((user, index) => {
     const imgWidth = 96;
@@ -80,6 +83,7 @@ export default function ProfilePage ({ navigation }) {
 
           
         </View>
+        
 
         <View style={styles.contactwrapper}>
           <View style={styles.contactheader}>
