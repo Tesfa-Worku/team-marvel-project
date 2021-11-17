@@ -44,6 +44,7 @@ const Login = ({ setLoggedIn, setStoredToken }) => {
     setPassword("");
     if (data?.message) {
       return Alert.alert("alert", data.message.replace(regex, ""));
+      console.log(data.message);
     }
   };
 
