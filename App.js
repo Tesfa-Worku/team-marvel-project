@@ -9,7 +9,7 @@ export default function App() {
   return (
     <AuthContextProvider>
       <NavigationContainer>
-        <Drawer setStoredToken={setStoredToken} />
+        <Drawer setStoredToken={setStoredToken} storedToken={storedToken}/>
         <Footer />
       </NavigationContainer>
     </AuthContextProvider>
