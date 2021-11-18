@@ -87,12 +87,12 @@ const Login = ({ setLoggedIn, setStoredToken }) => {
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <Text onPress={() => nav.navigate("ResetPassword")}>
           {" "}
           Reset Password{" "}
         </Text>
-      </View>
+      </View> */}
     </View>
   );
 };
