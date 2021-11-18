@@ -24,24 +24,32 @@ const endpoint = {
     token: '/jwt-auth/v1/token',
 };
 
-export const WP_GET = (type, queryStringVars = '') => {
+export const WP_GET = (type, queryStringVars = '', token) => {
     if (!endpoint[type] && typeof type !== 'string') {
         console.warn('WP_GET(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
     }
     if (typeof queryStringVars !== 'string') {
         console.warn(`WP_GET(type, queryStringVars): queryStringVars value must be a string that starts with '/' or '?'. This string will be appended to the end of the URL.`);
     }
-    return fetch(`${BASE_URL}${endpoint[type]}${queryStringVars}`)
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const bearer = { 'Authorization': `Bearer ${token}` };
+    options.headers = token ? {...bearer, ...options.headers} : options.headers;
+    return fetch(`${BASE_URL}${endpoint[type]}${queryStringVars}`, options)
         .then(response => response.json())
         .catch(error=> console.log(error))
 }
 
-export const WP_POST = (type, queryStringVars = '', bodyObj) => {
+export const WP_POST = (type, queryStringVars = '', bodyObj, token) => {
     if (!endpoint[type] && typeof type !== 'string') {
-        console.warn('WP_GET(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
+        console.warn('WP_POST(type, queryStringVars): type is required as a string. Select from these types: ', Object.keys(endpoint));
     }
     if (typeof queryStringVars !== 'string') {
-        console.warn(`WP_GET(type, queryStringVars): queryStringVars value must be a string that starts with '/' or '?'. This string will be appended to the end of the URL.`);
+        console.warn(`WP_POST(type, queryStringVars): queryStringVars value must be a string that starts with '/' or '?'. This string will be appended to the end of the URL.`);
     }
     const options = {
         method: 'POST',
@@ -50,6 +58,8 @@ export const WP_POST = (type, queryStringVars = '', bodyObj) => {
         },
         body: JSON.stringify(bodyObj)
     };
+    const bearer = { 'Authorization': `Bearer ${token}` };
+    options.headers = token ? {...bearer, ...options.headers} : options.headers;
     return fetch(`${BASE_URL}${endpoint[type]}`, options)
         .then(response => response.json())
         .catch(error=> console.log(error))

@@ -10,12 +10,11 @@ import {
 } from "react-native";
 import { WP_POST } from "./WPAPI";
 
-const Login = ({ setLoggedIn }) => {
+const Login = ({ setLoggedIn, setStoredToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
 
   useEffect(() => {
     if (loading) {
@@ -31,7 +30,7 @@ const Login = ({ setLoggedIn }) => {
   const nav = useNavigation();
 
   const formSuccess = (data) => {
-    setToken(data.token);
+    setStoredToken(data.token);
     setLoading(false);
     setUsername("");
     setPassword("");
@@ -45,6 +44,7 @@ const Login = ({ setLoggedIn }) => {
     setPassword("");
     if (data?.message) {
       return Alert.alert("alert", data.message.replace(regex, ""));
+      console.log(data.message);
     }
   };
 

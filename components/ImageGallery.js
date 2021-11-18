@@ -3,7 +3,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     Image,
     ScrollView,
 } from 'react-native';
@@ -20,26 +19,8 @@ export default function ImageGallery() {
         },
         []
     )
-    const [imageInput, setImageInput] = useState('');
-
-const uploadImage = () =>{
-// wordpress API
-}
-
-const sendImage = () => {
-    setImageArr([...imageArr, {image: imageInput}]);
-    setImageInput('');
-}
-
-const deleteImage = (index) => {
-    setImageArr(
-        imageArr.filter((image, selected) => selected != index)
-        );
-}
 
 const generateGallery = imageArr.map((img, index) => {
-    // imgWidth: 40vh
-    // const imgWidth = document.documentElement.clientHeight * 0.40;
     const imgWidth = 250;
     const imgHeight = (img.media_details.height / img.media_details.width) * imgWidth;
     
@@ -53,14 +34,6 @@ const generateGallery = imageArr.map((img, index) => {
                     source={{uri: img.source_url}}
                 />
             </View>
-            <View style={styles.deleteButton}>
-                <Button
-                    color='#F0131E'
-                    key={index}
-                    onPress={() => deleteImage(index)}
-                    title='Delete'
-                />
-            </View>
         </View>
         )
     }
@@ -70,19 +43,6 @@ return (
     <ScrollView style={styles.background}>
         <View style={styles.topContainer}>
             <Text>Images</Text>
-            <View style={styles.buttonContainer}>
-                <Button
-                    color='#F0131E'
-                    onPress={uploadImage}
-                    title='Upload'
-                />
-                <View style={styles.spacing} />
-                <Button
-                    color='#F0131E'
-                    onPress={sendImage}
-                    title='Send'
-                />
-            </View>
         </View>
         <View style={styles.imageContainer}>   
             {generateGallery}
@@ -107,21 +67,12 @@ const styles = StyleSheet.create({
     imageContainer: {
         backgroundColor: '#fff',
         display: 'flex',
-        // flexWrap: 'wrap',
-        // flexDirection: 'row',
         margin: 10,
     },
     imageRow: {
         height: 'auto',
         flexGrow: 1,
         alignItems: 'center',
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-    },
-    deleteButton: {
-        width: '20%',
-        alignSelf: 'center',
         margin: 5,
     },
     spacing: {

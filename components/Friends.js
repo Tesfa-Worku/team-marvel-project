@@ -8,12 +8,14 @@ import {
     Pressable
 } from 'react-native';
 import { WP_GET } from './WPAPI';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Friends({ navigation }) {
+export default function Friends() {
+    const nav = useNavigation();
     const [friendsArr, setFriendsArr] = useState([]);
     useEffect(
         () => {
-            WP_GET('users')
+            WP_GET('members')
             .then(
                 (data) => setFriendsArr(data)
             )
@@ -24,11 +26,11 @@ export default function Friends({ navigation }) {
 const generateFriends = friendsArr.map((user, index) => {
     return(
         <View key={index} >
-            <Pressable onPress={() => navigation.navigate('ProfilePage', {userId: user.id})}>
+            <Pressable onPress={() => nav.navigate('ProfilePage', {userId: user.id})}>
                 <View style={styles.imageRow} >
                     <Image
-                        style={{width: 96, height: 96}}
-                        source={{uri: user.avatar_urls?.['96'].startsWith('https:') ? user.avatar_urls?.['96'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
+                        style={{width: 150, height: 150}}
+                        source={{uri: user.avatar_urls?.full.startsWith('https:') ? user.avatar_urls?.full : 'https://www.gravatar.com/avatar/?d=identicon'}}
                     />
                     <Text>{user.name}</Text>
                 </View>
@@ -39,18 +41,23 @@ const generateFriends = friendsArr.map((user, index) => {
 )
 
 return (
-    <ScrollView>
+    <ScrollView style={styles.background}>
         <View style={styles.container}>
             <Text>Friends</Text>
         </View>
         <View style={styles.imageContainer}>
-            {generateFriends}
+            {friendsArr ? 
+            generateFriends : 
+            <Text>No friends. :(</Text>}
         </View>
     </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    background: {
+        backgroundColor: '#fff',
+    },
     container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -64,12 +71,12 @@ const styles = StyleSheet.create({
     imageContainer: {
         backgroundColor: '#fff',
         display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
         justifyContent: 'center',
+        margin: 10,
     },
     imageRow: {
         height: 'auto',
         flexGrow: 1,
+        alignItems: 'center',
     },
 });
