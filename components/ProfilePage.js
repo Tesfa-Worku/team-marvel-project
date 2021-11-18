@@ -16,6 +16,15 @@ export default function ProfilePage ({ navigation }) {
       },
       []
   )
+
+  const [buddypressData, setBuddypressData] = useState([]);
+    useEffect(() => WP_GET("members", `/1`)
+                .then(
+                    (data) => {
+                        setBuddypressData(data);
+                    }
+                ), []);
+
   const imgWidth = 96;
   const imgHeight = 96;
   const buildProfile = userList.map((user, index) => {
@@ -32,18 +41,15 @@ export default function ProfilePage ({ navigation }) {
         )
     }
 )
-  const [buddypressData, setBuddypressData] = useState([]);
-    useEffect(() => WP_GET("members", `/1`)
-                .then(
-                    (data) => {
-                        setBuddypressData(data);
-                    }
-                ), []);
+  
 
   return(
     <View style={styles.profilepage}>
+      
       <View style={styles.profilepageleft}>
-
+      <Text style={styles.username}>
+      {buddypressData.name}
+      </Text>      
 
         <View style={styles.profilesection}>
         <Image
