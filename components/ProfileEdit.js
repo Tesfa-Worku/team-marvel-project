@@ -13,30 +13,13 @@ export default function ProfileEdit () {
         <>
         
         <ProfilePage />
-            <Button 
-                title="Edit your profile..."
-                color='#F0131E'     
-            />
             <View style={styles.container}>
             <Text>
-                Profile Edit Page
+                <h3>Profile Edit Page</h3>
             </Text>
             <View>
-                {/* *** PROFILE IMAGES GO HERE*** */}
-                <Button
-                    title="Edit profile photo..." 
-                    color='#F0131'
-                />
+                <View>
 
-                
-
-            {/* PROFILE EDIT AREA GOES HERE:
-            -Image Gallery */}
-            <View>
-                <Button 
-                    title="Edit profile photo"
-                    color='#F0131E'
-                 />
                 <SafeAreaView>
                     <Text>Profile Name</Text>
                     <TextInput label="Profile Name"
@@ -51,7 +34,9 @@ export default function ProfileEdit () {
                         value="Edit Location here..." 
                     />
                 </SafeAreaView>
-                <Button title="Submit..." />
+                <Button title="Submit..." 
+                        color='#F0131E'
+                />
             </View>            
 
             </View>
