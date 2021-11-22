@@ -20,7 +20,7 @@ export default function Footer() {
             <Text>brought to you by team-marvel</Text>
         </View> 
         <View style={styles.linksWrapper}>
-            <Pressable onPress={() => nav.navigate("About")}>
+             <Pressable onPress={() => nav.navigate("About")}>
                 <Text>About</Text>
             </Pressable>            
             <Pressable onPress={() => nav.navigate("Rules")}>
@@ -31,7 +31,7 @@ export default function Footer() {
             </Pressable>
             <Pressable onPress={() => nav.navigate("Terms")}>
                 <Text>Terms</Text>
-            </Pressable>        
+            </Pressable>         
         </View>
         <View style={styles.rightsReserved}>
             <Text>©2021 MarvelSpace. All Rights Reserved.</Text>

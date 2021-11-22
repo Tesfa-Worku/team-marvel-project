@@ -423,6 +423,7 @@ function Drawer({ setStoredToken }) {
             name="ImageGallery"
             component={ImageGallery}
           />
+          
           <DrawerNavigation.Screen name="ProfilePage" component={ProfilePage} />
           <DrawerNavigation.Screen name="ProfileEdit" component={ProfileEdit} />
           <DrawerNavigation.Screen name="Users" component={Users} />

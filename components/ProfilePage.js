@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { render } from 'react-dom';
 import { StyleSheet,Text, View, Image, Button, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationContext } from 'react-navigation';
 import { WP_GET } from './WPAPI';
 
 
@@ -15,18 +16,26 @@ export default function ProfilePage ({ navigation }) {
       },
       []
   )
-  const nav = useNavigation();
 
+  const [buddypressData, setBuddypressData] = useState([]);
+    useEffect(() => WP_GET("members", `/1`)
+                .then(
+                    (data) => {
+                        setBuddypressData(data);
+                    }
+                ), []);
+
+  const imgWidth = 96;
+  const imgHeight = 96;
   const buildProfile = userList.map((user, index) => {
-    const imgWidth = 96;
-    const imgHeight = 96;
+    
     
     return(
         <View
             key={index} >
             <Image
                 style={{width: imgWidth, height: imgHeight}}
-                source={{uri: user.avatar_urls?.['96'].startsWith('https:') ? user.avatar_urls?.['96'] : 'https://www.gravatar.com/avatar/?d=identicon'}}
+                source={{uri: buddypressData.avatar_urls?.full.startsWith('https:') ? buddypressData.avatar_urls?.full : 'https://www.gravatar.com/avatar/?d=identicon'}}
             />
         </View>
         )
@@ -36,15 +45,17 @@ export default function ProfilePage ({ navigation }) {
 
   return(
     <View style={styles.profilepage}>
+      
       <View style={styles.profilepageleft}>
-        <View>
-          <Text style={styles.username}>
-            User Name
-          </Text>
-        </View>
+      <Text style={styles.username}>
+      {buddypressData.name}
+      </Text>      
 
         <View style={styles.profilesection}>
-          {buildProfile}
+        <Image
+                style={{width: imgWidth, height: imgHeight}}
+                source={{uri: buddypressData.avatar_urls?.full.startsWith('https:') ? buddypressData.avatar_urls?.full : 'https://www.gravatar.com/avatar/?d=identicon'}}
+            />
           <View style={styles.lastactive}>
             <Text> 
               Last Active: x minutes ago
@@ -75,7 +86,7 @@ export default function ProfilePage ({ navigation }) {
             <Button 
               title="Edit Profile"
               color='#F0131E'
-              onPress={() => nav.navigate('ProfileEdit')}
+              onPress={() => navigation.navigate('ProfileEdit')}
             />
 
           
@@ -90,17 +101,9 @@ export default function ProfilePage ({ navigation }) {
           <View style={styles.contactinformation}>
             <View style={styles.contactleft}>
               <Text>
-                  Add Friend
-                  Send Message
+                  Add Friend |
                   Add to Group
                 </Text>
-            </View>
-            <View style={styles.contactright}>
-              <Text>
-                Share
-                Block User
-                Report User
-              </Text>
             </View>
           </View>
         </View>
@@ -113,11 +116,11 @@ export default function ProfilePage ({ navigation }) {
           </View>
           <View style={styles.interestsinformation}>
             <Text>
-              General
-              Music
-              Movies
-              Television
-              Books
+              General |
+              Music |
+              Movies |
+              Television |
+              Books |
               Powers
             </Text>
           </View>
