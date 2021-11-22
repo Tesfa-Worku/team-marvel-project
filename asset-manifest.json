@@ -1,0 +1,35 @@
+{
+  "files": {
+    "app.js": "/team-marvel-project/static/js/app.e79e7a6c.chunk.js",
+    "app.js.map": "/team-marvel-project/static/js/app.e79e7a6c.chunk.js.map",
+    "runtime~app.js": "/team-marvel-project/static/js/runtime~app.98a96f0d.js",
+    "runtime~app.js.map": "/team-marvel-project/static/js/runtime~app.98a96f0d.js.map",
+    "static/js/2.3d9d6196.chunk.js": "/team-marvel-project/static/js/2.3d9d6196.chunk.js",
+    "static/js/2.3d9d6196.chunk.js.map": "/team-marvel-project/static/js/2.3d9d6196.chunk.js.map",
+    "fonts/AntDesign.ttf": "/team-marvel-project/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/team-marvel-project/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/team-marvel-project/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/team-marvel-project/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/team-marvel-project/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/team-marvel-project/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Fontisto.ttf": "/team-marvel-project/./fonts/Fontisto.ttf",
+    "fonts/Foundation.ttf": "/team-marvel-project/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/team-marvel-project/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/team-marvel-project/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/team-marvel-project/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/team-marvel-project/./fonts/SimpleLineIcons.ttf",
+    "favicon-16.png": "/team-marvel-project/favicon-16.png",
+    "favicon-32.png": "/team-marvel-project/favicon-32.png",
+    "favicon.ico": "/team-marvel-project/favicon.ico",
+    "index.html": "/team-marvel-project/index.html",
+    "manifest.json": "/team-marvel-project/manifest.json",
+    "serve.json": "/team-marvel-project/serve.json",
+    "static/js/2.3d9d6196.chunk.js.LICENSE.txt": "/team-marvel-project/static/js/2.3d9d6196.chunk.js.LICENSE.txt",
+    "static/media/Logo.png": "/team-marvel-project/static/media/Logo.6585d01c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.98a96f0d.js",
+    "static/js/2.3d9d6196.chunk.js",
+    "static/js/app.e79e7a6c.chunk.js"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "background_color": "#ffffff",
+  "description": "This is a social media app to connect with your favorite Marvel/DC characters. ",
+  "display": "standalone",
+  "lang": "en",
+  "name": "team-marvel-project",
+  "short_name": "team-marvel-project",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/team-marvel-project/pwa/chrome-icon/chrome-icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/team-marvel-project/pwa/chrome-icon/chrome-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/team-marvel-project/pwa/chrome-icon/chrome-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
