@@ -9,8 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build"
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo build:web" 
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
