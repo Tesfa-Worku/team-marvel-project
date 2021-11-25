@@ -1,11 +1,16 @@
 {
+  "name":"team-marvel",
+  "version":"1.0.0",
+  "homepage":"http://Tesfa-Worku.github.io/team-marvel-project",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo build:web" 
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -13,6 +18,7 @@
     "@react-navigation/drawer": "^6.1.8",
     "expo": "~43.0.0",
     "expo-status-bar": "~1.1.0",
+    "gh-pages": "^3.2.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^7.18.1",
@@ -22,7 +28,8 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
     "react-native-web": "0.17.1",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "react-responsive": "^9.0.0-beta.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

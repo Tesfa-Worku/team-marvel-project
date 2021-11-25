@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "This is a social media app to connect with your favorite Marvel/DC characters. ",
+    "githubUrl": "https://github.com/Tesfa-Worku/team-marvel-project.git"
   }
 }
